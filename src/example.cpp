@@ -3,6 +3,8 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    window.setVerticalSyncEnabled(true);
+
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
