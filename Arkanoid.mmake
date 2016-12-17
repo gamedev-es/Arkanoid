@@ -1,7 +1,60 @@
 <MinimalistMake>
     <Project name="Arkanoid" LuaScript="GCC.lua" CustomScript="" Horizontal="0">
-        <InitialNode ID="1" outID="0">
+        <InitialNode ID="1" outID="10">
             <Position x="10" y="0"/>
         </InitialNode>
+        <OutputFileNode ID="2" outID="0">
+            <Position x="657" y="448"/>
+            <Data Type="Executable" Name="Example" Path="Build/Debug/" MainFile="example.cpp" PathFile="src/" Execute="1"/>
+        </OutputFileNode>
+        <SystemNode ID="3" extID="6" outID="4">
+            <Position x="58" y="448"/>
+            <System OS="Windows"/>
+        </SystemNode>
+        <SystemNode ID="4" extID="12" outID="0">
+            <Position x="58" y="576"/>
+            <System OS="Linux"/>
+        </SystemNode>
+        <PreprocessorNode ID="5" outID="3">
+            <Position x="17" y="320"/>
+            <Preprocessor name="SFML_STATIC"/>
+        </PreprocessorNode>
+        <LibraryNode ID="6" outID="8">
+            <Position x="337" y="64"/>
+            <Library name="External/Library_Windows"/>
+        </LibraryNode>
+        <LinkerNode ID="7" outID="9">
+            <Position x="337" y="384"/>
+            <Linker name="freetype"/>
+            <Linker name="jpeg"/>
+            <Linker name="stdc++"/>
+            <Linker name="winmm"/>
+            <Linker name="gdi32"/>
+            <Linker name="opengl32"/>
+        </LinkerNode>
+        <LinkerNode ID="8" outID="7">
+            <Position x="337" y="192"/>
+            <Linker name="sfml-window-s"/>
+            <Linker name="sfml-system-s"/>
+            <Linker name="sfml-graphics-s"/>
+        </LinkerNode>
+        <HeaderNode ID="9" outID="2">
+            <Position x="337" y="640"/>
+            <Header name="External/Include"/>
+        </HeaderNode>
+        <CompilerNode ID="10" outID="5">
+            <Position x="37" y="192"/>
+            <Option name="std=c++11"/>
+        </CompilerNode>
+        <PkgConfigNode ID="11" outID="2">
+            <Position x="682" y="192"/>
+            <PkgConfig name="sfml-window"/>
+            <PkgConfig name="sfml-system"/>
+            <PkgConfig name="sfml-graphics"/>
+        </PkgConfigNode>
+        <LinkerNode ID="12" outID="11">
+            <Position x="657" y="64"/>
+            <Linker name="stdc++"/>
+        </LinkerNode>
     </Project>
 </MinimalistMake>
