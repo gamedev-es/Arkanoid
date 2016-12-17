@@ -1,0 +1,28 @@
+{
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+	"build_systems":
+    [
+        {
+            "name": "1 Build and Run -> Arkanoid",
+            "shell_cmd": "MinimalistMake \"Arkanoid.mmake\" -Build -Run -Debug",
+            "working_dir": "${project_path}",
+        },
+        {
+
+            "name": "2 Build -> Arkanoid",
+            "shell_cmd": "MinimalistMake \"Arkanoid.mmake\" -Build -Debug",
+            "working_dir": "${project_path}",
+        },
+        {
+
+            "name": "3 Clear",
+            "shell_cmd": "MinimalistMake \"Arkanoid.mmake\" -Clear",
+            "working_dir": "${project_path}",
+        },
+    ]
+}

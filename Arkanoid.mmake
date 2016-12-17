@@ -1,0 +1,7 @@
+<MinimalistMake>
+    <Project name="Arkanoid" LuaScript="GCC.lua" CustomScript="" Horizontal="0">
+        <InitialNode ID="1" outID="0">
+            <Position x="10" y="0"/>
+        </InitialNode>
+    </Project>
+</MinimalistMake>

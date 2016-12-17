@@ -1,0 +1,10 @@
+*.o
+*.d
+*.so
+*.ini
+*.sublime-workspace
+
+Arkanoid.sublime-workspace
+
+/Build/
+/OBJ/
