@@ -1,107 +1,60 @@
 <MinimalistMake>
-    <Project name="Arkanoid" LuaScript="GCC.lua" CustomScript="" Horizontal="1">
-        <InitialNode ID="1" outID="13">
-            <Position x="0" y="65"/>
+    <Project name="Arkanoid" LuaScript="GCC.lua" CustomScript="" Horizontal="0">
+        <InitialNode ID="1" outID="10">
+            <Position x="43" y="0"/>
         </InitialNode>
-        <OutputFileNode ID="2" outID="5">
-            <Position x="2176" y="151"/>
-            <Data Type="Executable" Name="Example_Window" Path="Build/Debug/" MainFile="core_basic_window.cpp" PathFile="Source/" Execute="1"/>
+        <OutputFileNode ID="2" outID="0">
+            <Position x="642" y="450"/>
+            <Data Type="Executable" Name="Example" Path="Build/Debug/" MainFile="example.cpp" PathFile="Source/" Execute="1"/>
         </OutputFileNode>
         <SystemNode ID="3" extID="6" outID="4">
-            <Position x="832" y="95"/>
+            <Position x="80" y="500"/>
             <System OS="Windows"/>
         </SystemNode>
-        <SystemNode ID="4" extID="18" outID="0">
-            <Position x="1024" y="95"/>
+        <SystemNode ID="4" extID="12" outID="0">
+            <Position x="80" y="600"/>
             <System OS="Linux"/>
         </SystemNode>
+        <PreprocessorNode ID="5" outID="3">
+            <Position x="39" y="350"/>
+            <Preprocessor name="SFML_STATIC"/>
+        </PreprocessorNode>
         <LibraryNode ID="6" outID="8">
-            <Position x="1020" y="592"/>
+            <Position x="339" y="50"/>
             <Library name="External/Library_Windows"/>
         </LibraryNode>
-        <LinkerNode ID="8" outID="7">
-            <Position x="1280" y="521"/>
-            <Linker name="raylib"/>
-            <Linker name="glfw3"/>
-            <Linker name="glu32"/>
-            <Linker name="opengl32"/>
-            <Linker name="gdi32"/>
-            <Linker name="openal32"/>
+        <LinkerNode ID="7" outID="9">
+            <Position x="339" y="400"/>
+            <Linker name="freetype"/>
+            <Linker name="jpeg"/>
+            <Linker name="stdc++"/>
             <Linker name="winmm"/>
+            <Linker name="gdi32"/>
+            <Linker name="opengl32"/>
         </LinkerNode>
-        <HeaderNode ID="9" outID="15">
-            <Position x="1792" y="401"/>
+        <LinkerNode ID="8" outID="7">
+            <Position x="339" y="200"/>
+            <Linker name="sfml-window-s"/>
+            <Linker name="sfml-system-s"/>
+            <Linker name="sfml-graphics-s"/>
+        </LinkerNode>
+        <HeaderNode ID="9" outID="2">
+            <Position x="339" y="650"/>
             <Header name="External/Include"/>
         </HeaderNode>
-        <OutputFileNode ID="5" outID="0">
-            <Position x="2432" y="151"/>
-            <Data Type="Executable" Name="Example_Window" Path="Build/Debug/" MainFile="audio_music_stream.cpp" PathFile="Source/" Execute="1"/>
-        </OutputFileNode>
-        <FlagNode ID="7" outID="9">
-            <Position x="1536" y="581"/>
-            <Flag name="-Wl,--subsystem,windows"/>
-            <Flag name="-Wl,-allow-multiple-definition"/>
-        </FlagNode>
-        <CompilerNode ID="10" outID="3">
-            <Position x="576" y="21"/>
-            <Compiler Compiler="C++ Languaje"/>
-            <Option name="Wall"/>
-            <Option name="Werror"/>
-            <Option name="Wextra"/>
-            <Option name="Wno-unused-but-set-variable"/>
-            <Option name="pedantic"/>
+        <CompilerNode ID="10" outID="5">
+            <Position x="59" y="200"/>
             <Option name="std=c++11"/>
         </CompilerNode>
-        <DebugNode ID="13" extID="14" outID="10">
-            <Position x="320" y="91"/>
-        </DebugNode>
-        <CompilerNode ID="14" outID="3">
-            <Position x="576" y="261"/>
-            <Compiler Compiler="C++ Languaje"/>
-            <Option name="O3"/>
-            <Option name="std=c++11"/>
-        </CompilerNode>
-        <DebugNode ID="15" extID="16" outID="2">
-            <Position x="1920" y="219"/>
-        </DebugNode>
-        <OutputFileNode ID="16" outID="17">
-            <Position x="2176" y="407"/>
-            <Data Type="Executable" Name="Example_Audio" Path="Build/Release/" MainFile="core_basic_window.cpp" PathFile="Source/" Execute="1"/>
-        </OutputFileNode>
-        <OutputFileNode ID="17" outID="0">
-            <Position x="2432" y="407"/>
-            <Data Type="Executable" Name="Example_Audio" Path="Build/Release/" MainFile="audio_music_stream.cpp" PathFile="Source/" Execute="1"/>
-        </OutputFileNode>
-        <LibraryNode ID="18" outID="11">
-            <Position x="1026" y="273"/>
-            <Library name="External/Library_Linux"/>
-        </LibraryNode>
-        <LinkerNode ID="11" outID="12">
-            <Position x="1280" y="129"/>
-            <Linker name="raylib"/>
-            <Linker name="glfw3"/>
-            <Linker name="Xrandr"/>
-            <Linker name="Xinerama"/>
-            <Linker name="Xi"/>
-            <Linker name="Xcursor"/>
-            <Linker name="m"/>
-            <Linker name="dl"/>
-            <Linker name="Xrender"/>
-            <Linker name="Xdamage"/>
-            <Linker name="X11"/>
-            <Linker name="Xxf86vm"/>
-            <Linker name="pthread"/>
-        </LinkerNode>
-        <PkgConfigNode ID="12" outID="9">
-            <Position x="1536" y="249"/>
-            <PkgConfig name="openal"/>
-            <PkgConfig name="glu"/>
-            <PkgConfig name="gl"/>
+        <PkgConfigNode ID="11" outID="2">
+            <Position x="664" y="200"/>
+            <PkgConfig name="sfml-window"/>
+            <PkgConfig name="sfml-system"/>
+            <PkgConfig name="sfml-graphics"/>
         </PkgConfigNode>
-        <CommentsNode ID="19">
-            <Position x="1536" y="159"/>
-            <Comment name="En Linux no he podido probarlo porque Ubuntu lo tengo en una
-maquina virtual (VM)."/>
-        </CommentsNode>
+        <LinkerNode ID="12" outID="11">
+            <Position x="639" y="50"/>
+            <Linker name="stdc++"/>
+        </LinkerNode>
     </Project>
 </MinimalistMake>

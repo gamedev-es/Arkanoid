@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(arkanoid)
 
 include_directories(include)
-file(GLOB_RECURSE SRC_FILES Source/*.cpp)
+file(GLOB_RECURSE SRC_FILES src/*.cpp)
 
 add_executable(arkanoid ${SRC_FILES})
 
