@@ -3,6 +3,7 @@
 *.so
 *.ini
 *.sln
+*.user
 *.sublime-workspace
 
 *.cmake
@@ -10,6 +11,9 @@
 Arkanoid.sublime-workspace
 
 CMakeCache.txt
+
+Makefile
+Source/Makefile
 
 Build/
 OBJ/
