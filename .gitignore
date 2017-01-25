@@ -2,9 +2,23 @@
 *.d
 *.so
 *.ini
+*.user
+*.sln
 *.sublime-workspace
+
+*.cmake
 
 Arkanoid.sublime-workspace
 
-/Build/
-/OBJ/
+CMakeCache.txt
+Makefile
+
+Source/Makefile
+
+Build/
+OBJ/
+
+CMakeFiles/
+Source/CMakeFiles/
+
+External/SFML/

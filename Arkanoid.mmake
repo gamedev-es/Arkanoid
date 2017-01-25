@@ -1,30 +1,33 @@
 <MinimalistMake>
-    <Project name="Arkanoid" LuaScript="GCC.lua" CustomScript="" Horizontal="0">
+    <Project name="Arkanoid" LuaScript="GCC.lua" Horizontal="1">
         <InitialNode ID="1" outID="10">
-            <Position x="43" y="0"/>
+            <Position x="0" y="83"/>
         </InitialNode>
         <OutputFileNode ID="2" outID="0">
-            <Position x="642" y="450"/>
-            <Data Type="Executable" Name="Example" Path="Build/Debug/" MainFile="example.cpp" PathFile="Source/" Execute="1"/>
+            <Position x="2100" y="181"/>
+            <Data Type="Executable" Name="Arkanoid" Path="Build/Debug/" MainFile="main.cpp" PathFile="Source/" Execute="1"/>
         </OutputFileNode>
         <SystemNode ID="3" extID="6" outID="4">
-            <Position x="80" y="500"/>
+            <Position x="1000" y="67"/>
             <System OS="Windows"/>
         </SystemNode>
         <SystemNode ID="4" extID="12" outID="0">
-            <Position x="80" y="600"/>
+            <Position x="1200" y="67"/>
             <System OS="Linux"/>
         </SystemNode>
         <PreprocessorNode ID="5" outID="3">
-            <Position x="39" y="350"/>
+            <Position x="750" y="53"/>
             <Preprocessor name="SFML_STATIC"/>
         </PreprocessorNode>
-        <LibraryNode ID="6" outID="8">
-            <Position x="339" y="50"/>
+        <LibraryNode ID="6" outID="7">
+            <Position x="1100" y="403"/>
             <Library name="External/Library_Windows"/>
         </LibraryNode>
         <LinkerNode ID="7" outID="9">
-            <Position x="339" y="400"/>
+            <Position x="1350" y="307"/>
+            <Linker name="sfml-window-s"/>
+            <Linker name="sfml-system-s"/>
+            <Linker name="sfml-graphics-s"/>
             <Linker name="freetype"/>
             <Linker name="jpeg"/>
             <Linker name="stdc++"/>
@@ -32,29 +35,45 @@
             <Linker name="gdi32"/>
             <Linker name="opengl32"/>
         </LinkerNode>
-        <LinkerNode ID="8" outID="7">
-            <Position x="339" y="200"/>
-            <Linker name="sfml-window-s"/>
-            <Linker name="sfml-system-s"/>
-            <Linker name="sfml-graphics-s"/>
-        </LinkerNode>
-        <HeaderNode ID="9" outID="2">
-            <Position x="339" y="650"/>
+        <HeaderNode ID="9" outID="8">
+            <Position x="1600" y="403"/>
             <Header name="External/Include"/>
         </HeaderNode>
-        <CompilerNode ID="10" outID="5">
-            <Position x="59" y="200"/>
-            <Option name="std=c++11"/>
-        </CompilerNode>
-        <PkgConfigNode ID="11" outID="2">
-            <Position x="664" y="200"/>
+        <PkgConfigNode ID="11" outID="8">
+            <Position x="1600" y="129"/>
             <PkgConfig name="sfml-window"/>
             <PkgConfig name="sfml-system"/>
             <PkgConfig name="sfml-graphics"/>
         </PkgConfigNode>
         <LinkerNode ID="12" outID="11">
-            <Position x="639" y="50"/>
+            <Position x="1350" y="153"/>
             <Linker name="stdc++"/>
         </LinkerNode>
+        <CompilerNode ID="13" outID="5">
+            <Position x="500" y="43"/>
+            <Compiler Compiler="C++ Languaje"/>
+            <Option name="Wall"/>
+            <Option name="Werror"/>
+            <Option name="Wextra"/>
+            <Option name="Wno-unused-but-set-variable"/>
+            <Option name="pedantic"/>
+            <Option name="std=c++11"/>
+        </CompilerNode>
+        <DebugNode ID="10" extID="14" outID="13">
+            <Position x="250" y="113"/>
+        </DebugNode>
+        <CompilerNode ID="14" outID="5">
+            <Position x="500" y="291"/>
+            <Compiler Compiler="C++ Languaje"/>
+            <Option name="O3"/>
+            <Option name="std=c++11"/>
+        </CompilerNode>
+        <DebugNode ID="8" extID="15" outID="2">
+            <Position x="1850" y="263"/>
+        </DebugNode>
+        <OutputFileNode ID="15" outID="0">
+            <Position x="2100" y="431"/>
+            <Data Type="Executable" Name="Arkanoid" Path="Build/Release/" MainFile="main.cpp" PathFile="Source/" Execute="1"/>
+        </OutputFileNode>
     </Project>
 </MinimalistMake>
