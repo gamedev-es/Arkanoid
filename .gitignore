@@ -2,7 +2,6 @@
 *.d
 *.so
 *.ini
-*.user
 *.sln
 *.sublime-workspace
 
@@ -11,9 +10,6 @@
 Arkanoid.sublime-workspace
 
 CMakeCache.txt
-Makefile
-
-Source/Makefile
 
 Build/
 OBJ/
