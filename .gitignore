@@ -2,8 +2,8 @@
 *.d
 *.so
 *.ini
-*.user
 *.sln
+*.user
 *.sublime-workspace
 
 *.cmake
@@ -11,8 +11,8 @@
 Arkanoid.sublime-workspace
 
 CMakeCache.txt
-Makefile
 
+Makefile
 Source/Makefile
 
 Build/
