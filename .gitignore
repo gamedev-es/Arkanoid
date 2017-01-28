@@ -7,8 +7,6 @@
 *.log
 *.sublime-workspace
 
-*.cmake
-
 Arkanoid.sublime-workspace
 
 CMakeCache.txt
@@ -22,5 +20,4 @@ OBJ/
 CMakeFiles/
 Source/CMakeFiles/
 
-External/SFML/
 Solution
