@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-#include <Arkanoid.h>
+#include "Game/Arkanoid.h"
 
-using namespace GDE;
+using namespace GDES;
 
 int main()
 {

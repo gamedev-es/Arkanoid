@@ -4,6 +4,7 @@
 *.ini
 *.sln
 *.user
+*.log
 *.sublime-workspace
 
 *.cmake
@@ -22,3 +23,4 @@ CMakeFiles/
 Source/CMakeFiles/
 
 External/SFML/
+Solution

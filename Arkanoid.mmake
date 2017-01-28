@@ -21,7 +21,7 @@
         </PreprocessorNode>
         <LibraryNode ID="6" outID="7">
             <Position x="1150" y="603"/>
-            <Library name="External/Library_Windows"/>
+            <Library name="External/SFML/Library_Windows"/>
         </LibraryNode>
         <LinkerNode ID="7" outID="16">
             <Position x="1400" y="567"/>
@@ -32,7 +32,7 @@
         </LinkerNode>
         <HeaderNode ID="9" outID="17">
             <Position x="1900" y="591"/>
-            <Header name="External/Include"/>
+            <Header name="External/SFML/Include"/>
             <Header name="Source/"/>
         </HeaderNode>
         <PkgConfigNode ID="11" outID="19">
@@ -88,14 +88,14 @@
         </LinkerNode>
         <FilesNode ID="17" outID="18">
             <Position x="2200" y="315"/>
-            <Path name="Source/"/>
+            <Path name="Source/Game"/>
             <File name="Arkanoid.cpp"/>
             <File name="Ball.cpp"/>
             <File name="Paddle.cpp"/>
         </FilesNode>
         <SmartFileNode ID="18" outID="8">
             <Position x="2450" y="327"/>
-            <Path name="Source/GDEngine" Recursive="1"/>
+            <Path name="Source/GDCore" Recursive="1"/>
             <Filter name=".cpp"/>
         </SmartFileNode>
         <HeaderNode ID="19" outID="17">
