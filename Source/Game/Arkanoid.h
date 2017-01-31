@@ -4,9 +4,12 @@
 
 #include "../GDCore/GDCore.h"
 
-using namespace GDES;
+enum SCENES_LIST 
+{
+	TEST = 0
+};
 
-class Arkanoid : public GDCore
+class Arkanoid : public GDES::GDCore
 {
 public:
     Arkanoid();

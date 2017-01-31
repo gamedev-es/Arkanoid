@@ -11,15 +11,16 @@
 
 namespace GDES
 {
-    class Entity
-    {
-    public:
-        Entity();
+	class Entity
+	{
+	public:
+		Entity();
+		~Entity();
 
-        virtual void LoadContent() const = 0;
-        virtual void Update(sf::Time elapsedTime) const = 0;
-        virtual void Draw() const = 0;
-    };
+		virtual void LoadContent() = 0;
+		virtual void Update(sf::Time elapsedTime) = 0;
+		virtual void Draw(sf::RenderWindow* window) = 0;
+	};
 }
 
 

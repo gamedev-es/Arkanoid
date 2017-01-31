@@ -20,33 +20,33 @@
 
 namespace GDES
 {
-    class GDCore
-    {
-    public:
-        GDCore(const sf::String &title, int width, int heigh, const sf::String &assetsDiretory = "Data");
-        ~GDCore();
+	class GDCore
+	{
+	public:
+		GDCore(const sf::String &title, int width, int heigh, const sf::String &assetsDiretory = "Data");
+		~GDCore();
 
 		void Initialize();
-        void Run();
-        void Exit();
-        void SetTitle(const sf::String &title);
+		void Run();
+		void Exit();
+		void SetTitle(const sf::String &title);
 
-    private:
+	private:
 		GDCore();
-        void Update(sf::Time elapsedTime);
-        void ProcessEvents();
-        void Render();
-        bool exit;
+		void Update(sf::Time elapsedTime);
+		void ProcessEvents();
+		void Render();
+		bool exit;
 
-        static const sf::Time TimePerFrame;
-        sf::RenderWindow mWindow;
+		static const sf::Time TimePerFrame;
+		sf::RenderWindow mWindow;
 
-    protected:
-        SceneManager sceneManager;
+	protected:
+		SceneManager sceneManager;
 		InputManager inputManager;
-        sf::String  assetsDirectoryRoot;
+		sf::String  assetsDirectoryRoot;
 
-    };
+	};
 }
 
 #endif // GDCORE_H

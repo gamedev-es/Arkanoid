@@ -92,6 +92,7 @@
             <File name="Arkanoid.cpp"/>
             <File name="Ball.cpp"/>
             <File name="Paddle.cpp"/>
+            <File name="TestScene.cpp"/>
         </FilesNode>
         <SmartFileNode ID="18" outID="8">
             <Position x="2450" y="327"/>

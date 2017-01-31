@@ -4,16 +4,15 @@
 
 #include "../GDCore/Entity.h"
 
-using namespace GDES;
-
-class Paddle : public Entity
+class Paddle : public GDES::Entity
 {
 public:
-    Paddle();
+	Paddle();
+	~Paddle();
 
-    void LoadContent();
-    void Update(sf::Time elapsedTime);
-    void Draw();
+	virtual void LoadContent() override;
+	virtual void Update(sf::Time elapsedTime) override;
+	virtual void Draw(sf::RenderWindow* window) override;
 };
 
 #endif // PADDLE_H

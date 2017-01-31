@@ -13,15 +13,21 @@
 
 namespace GDES
 {
-    class SceneManager
-    {
-    public:
-        SceneManager();
-        ~SceneManager();
+	class SceneManager
+	{
+	public:
+		SceneManager();
+		~SceneManager();
 
-        Scene *currentScene;
-
-    };
+		bool AddScene(int sceneIndex, Scene* scene, bool isCurrentScene = false);
+		bool SetCurrentScene(int sceneIndex);
+		bool RemoveScene(int sceneIndex, bool removeFromMemory);
+		Scene* GetScene(int sceneIndex);
+		Scene* GetCurrentScene() { return currentScene; }
+	private:
+		Scene *currentScene;
+		std::map<int, Scene*> sceneMap;
+	};
 }
 
 #endif // SCENEMANAGER_H

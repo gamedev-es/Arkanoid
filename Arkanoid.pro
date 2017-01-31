@@ -7,6 +7,7 @@ SOURCES += Source/main.cpp \
     Source/Game/Arkanoid.cpp \
     Source/Game/Ball.cpp \
     Source/Game/Paddle.cpp \
+    Source/Game/TestScene.cpp \
     Source/GDCore/Entity.cpp \
     Source/GDCore/GDCore.cpp \
     Source/GDCore/Scene.cpp \

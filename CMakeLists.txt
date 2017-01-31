@@ -30,6 +30,8 @@ set (SourceGroup_Game
   "${SRC_PATH}/Game/Ball.cpp"
   "${SRC_PATH}/Game/Paddle.h"
   "${SRC_PATH}/Game/Paddle.cpp"
+  "${SRC_PATH}/Game/TestScene.h"
+  "${SRC_PATH}/Game/TestScene.cpp"
 )
 source_group("Game" FILES ${SourceGroup_Game})
 

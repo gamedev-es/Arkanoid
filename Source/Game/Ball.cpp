@@ -15,7 +15,7 @@ void Ball::Update(sf::Time elapsedTime)
 
 }
 
-void Ball::Draw()
+void Ball::Draw(sf::RenderWindow* window)
 {
 
 }

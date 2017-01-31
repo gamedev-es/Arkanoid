@@ -57,9 +57,9 @@ namespace GDES
 
     void GDCore::Update(sf::Time elapsedTime)
     {
-        if (this->sceneManager.currentScene != NULL)
+        if (this->sceneManager.GetCurrentScene() != NULL)
         {
-            this->sceneManager.currentScene->Update(elapsedTime);
+            this->sceneManager.GetCurrentScene()->Update(elapsedTime);
         }
 
     }
@@ -68,9 +68,9 @@ namespace GDES
     {
         mWindow.clear();
 
-        if (this->sceneManager.currentScene != NULL)
+        if (this->sceneManager.GetCurrentScene() != NULL)
         {
-            this->sceneManager.currentScene->Draw();
+            this->sceneManager.GetCurrentScene()->Draw(&mWindow);
         }
 
         mWindow.display();
