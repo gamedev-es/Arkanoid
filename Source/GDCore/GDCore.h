@@ -31,6 +31,18 @@ namespace GDES
 		void Exit();
 		void SetTitle(const sf::String &title);
 
+		//Singleton
+		static InputManager* GetInputManager()
+		{
+			static InputManager* inputManager = new InputManager();
+			return inputManager;
+		}
+
+		static SceneManager* GetSceneManager()
+		{
+			static SceneManager* sceneManager = new SceneManager();
+			return sceneManager;
+		}
 	private:
 		GDCore();
 		void Update(sf::Time elapsedTime);
@@ -40,10 +52,7 @@ namespace GDES
 
 		static const sf::Time TimePerFrame;
 		sf::RenderWindow mWindow;
-
 	protected:
-		SceneManager sceneManager;
-		InputManager inputManager;
 		sf::String  assetsDirectoryRoot;
 
 	};
