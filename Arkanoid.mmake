@@ -52,7 +52,7 @@
             <Option name="Werror"/>
             <Option name="Wextra"/>
             <Option name="Wno-unused-but-set-variable"/>
-            <Option name="pedantic"/>
+            <Option name="Wpedantic"/>
             <Option name="std=c++11"/>
         </CompilerNode>
         <DebugNode ID="10" extID="14" outID="13">
@@ -86,14 +86,6 @@
             <Linker name="ogg"/>
             <Linker name="stdc++"/>
         </LinkerNode>
-        <FilesNode ID="17" outID="18">
-            <Position x="2200" y="315"/>
-            <Path name="Source/Game"/>
-            <File name="Arkanoid.cpp"/>
-            <File name="Ball.cpp"/>
-            <File name="Paddle.cpp"/>
-            <File name="TestScene.cpp"/>
-        </FilesNode>
         <SmartFileNode ID="18" outID="8">
             <Position x="2450" y="327"/>
             <Path name="Source/GDCore" Recursive="1"/>
@@ -103,5 +95,10 @@
             <Position x="1900" y="203"/>
             <Header name="Source/"/>
         </HeaderNode>
+        <SmartFileNode ID="17" outID="18">
+            <Position x="2200" y="327"/>
+            <Path name="Source/Game" Recursive="1"/>
+            <Filter name=".cpp"/>
+        </SmartFileNode>
     </Project>
 </MinimalistMake>
