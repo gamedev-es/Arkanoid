@@ -16,6 +16,7 @@ namespace GDES
 	{
 		exit = false;
 		mWindow.setView(mWindow.getDefaultView());
+		mWindow.setFramerateLimit(60);
 	}
 
 	void GDCore::Run()

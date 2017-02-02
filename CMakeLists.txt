@@ -9,6 +9,8 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 endif()
 
+set (CMAKE_CXX_STANDARD 11)
+
 project(${EXECUTABLE_NAME})
 
 # Set Variables and SDKs Folders

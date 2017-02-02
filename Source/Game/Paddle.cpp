@@ -58,10 +58,5 @@ void Paddle::Update(sf::Time elapsedTime)
 
 void Paddle::Draw(sf::RenderWindow* window)
 {
-	if (!window)
-	{
-		return; //Nada que dibujar
-	}
-
 	window->draw(rectangle);
 }
