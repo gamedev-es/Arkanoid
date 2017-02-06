@@ -19,6 +19,6 @@ namespace GDES
 	private:
 		bool m_keys[256];
 	};
-};
+}
 
 #endif // INPUT_MANAGER_H

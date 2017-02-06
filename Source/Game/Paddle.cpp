@@ -1,62 +1,105 @@
+#include <math.h>
 #include "Paddle.h"
 #include "Arkanoid.h"
 #include <SFML\Graphics.hpp>
+#include <SFML/System/Time.hpp>
 
-sf::RectangleShape rectangle(sf::Vector2f(120, 30));
-sf::Vector2f position(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
-float speed = 5.0f;
-float padding = 20;
-int dir = 1;
-float limitLeft = padding;
-float limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - padding);
 
-Paddle::Paddle()
-{
+Paddle::Paddle(){
+    this->rectangle.setSize(sf::Vector2f(100,20));
+    this->position = sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
 
-}
+    limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
 
-Paddle::~Paddle()
-{
+    //objetos para controlar la duración de las pulsaciones
+    sLeft = new ButtonState();
+    sRight = new ButtonState();
 
 }
 
-void Paddle::LoadContent()
-{
-	rectangle.setPosition(position);
+Paddle::~Paddle(){
+
 }
 
-void Paddle::Update(sf::Time elapsedTime)
-{
+void Paddle::LoadContent(){
+        rectangle.setPosition(this->position);
+}
+
+void Paddle::Update(sf::Time elapsedTime){
+
 
 	if (position.x < limitLeft) {
-		dir = 1;
 		position.x = limitLeft;
 	}
 
-	if (position.x > limitRight) {
-		dir = -1;
+        else if (position.x > limitRight) {
 		position.x = limitRight;
 	}
 
+        //pulsar izquierda
 	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left)) {
-		position.x += speed * -1;
-		rectangle.setPosition(position);
-	}
+                this->sLeft->buttonDown = true;
+                this->sRight->buttonDown = false; //No quiero que esten activados a la vez
 
-	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right)) {
-		position.x += speed;
-		rectangle.setPosition(position);
-	}
+                if (sLeft->stateChange){    //Necesario para calcular la velocidad objetivo
+                    this->initialSpeed = this->speed;
+                }
 
-	/*
-	//Movimiento automatizado
-	position.x += speed * dir;
-	rectangle.setPosition(position);
-	*/
+                this->moveTime = sLeft->steadyTime;
+                Speed(-this->limitSpeed,Tau);
+	}
+        //pulsar derecha
+        else if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right)) {
+                sRight->buttonDown = true;
+                sLeft->buttonDown = false; //No quiero que esten activados a la vez
+
+                if (sRight->stateChange){    //Necesario para calcular la velocidad objetivo
+                    this->initialSpeed = this->speed;
+                }
+
+                this->moveTime = sRight->steadyTime;
+                Speed(this->limitSpeed,Tau);
+	}
+        //frenada
+        else{
+            sRight->buttonDown = false;
+            sLeft->buttonDown = false;
+
+            //es un pequeño lio para determinar que steady Time hay que usar
+            if (sLeft->stateChange || sRight->stateChange){
+                this->initialSpeed = this->speed;
+            }
+            if (sRight->steadyTime<sLeft->steadyTime)
+                this->moveTime = sRight->steadyTime;
+            else
+                this->moveTime = sLeft->steadyTime;
+
+            this->Speed(0,Tau);
+        }
+
+        //Posicion a partir de velocidad
+        position.x += this->speed*elapsedTime.asSeconds();
+        rectangle.setPosition(position);
+
+        sRight->timeUpdate(elapsedTime);
+        sLeft->timeUpdate(elapsedTime);
 
 }
 
-void Paddle::Draw(sf::RenderWindow* window)
-{
-	window->draw(rectangle);
+void Paddle::Draw(sf::RenderWindow* window){
+        window->draw(this->rectangle);
 }
+
+
+/* aceleración de la paleta
+ -> limite de velocidad
+ -> rapidez de transitorio
+ */
+void Paddle::Speed(float speedlimit,float Tau){
+    this->speed = speedlimit +(initialSpeed-speedlimit)*exp(-Tau*this->moveTime);
+
+}
+
+
+
+
