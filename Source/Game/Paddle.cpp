@@ -1,18 +1,13 @@
 #include "Paddle.h"
 #include "Arkanoid.h"
-#include <SFML\Graphics.hpp>
 
-sf::RectangleShape rectangle(sf::Vector2f(120, 30));
-sf::Vector2f position(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
-float speed = 5.0f;
-float padding = 20;
-int dir = 1;
-float limitLeft = padding;
-float limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - padding);
 
-Paddle::Paddle()
+
+Paddle::Paddle(Ball *ball)
 {
-
+    this->ball = ball;
+    this->rectangle.setSize(sf::Vector2f(width, height));
+    this->position = sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
 }
 
 Paddle::~Paddle()
@@ -38,15 +33,28 @@ void Paddle::Update(sf::Time elapsedTime)
 		position.x = limitRight;
 	}
 
+    // Movimiento a la izquierda
 	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left)) {
 		position.x += speed * -1;
 		rectangle.setPosition(position);
 	}
 
+    // Movimiento a la derecha
 	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right)) {
 		position.x += speed;
 		rectangle.setPosition(position);
 	}
+
+    // Capturamos la bola
+    if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Space)) {
+        this->ball->Capture(sf::Vector2f(position.x + ((width - this->ball->GetRadius()) / 2), position.y - 50));
+    }
+    else
+    {
+        if (this->ball->IsCaught())
+            this->ball->Throw(sf::Vector2f(-1,-1), 0);
+    }
+
 
 	/*
 	//Movimiento automatizado

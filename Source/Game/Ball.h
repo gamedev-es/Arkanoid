@@ -18,13 +18,18 @@ public:
 	virtual void Draw(sf::RenderWindow* window) override;
 
 public:
-    void Throw(sf::Vector2f* direction, float acceleration);
-    void SetPos(int x, int y);
+    void Throw(sf::Vector2f direction, float acceleration);
+    void Capture(sf::Vector2f pos);
+    bool IsCaught();
+    float GetRadius();
 
 private:
-    bool CollideX();
-    bool CollideY();
+    bool IsCollideX();
+    bool IsCollideY();
+
+
     void LoseBall();
+    void SetPos(int x, int y);
 
 private:
     sf::CircleShape ball;
