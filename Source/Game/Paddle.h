@@ -10,9 +10,19 @@
 #include "Paddle.h"
 #include "Arkanoid.h"
 #include "ButtonState.h"
+#include "Ball.h"
 
-class Paddle : public GDES::Entity
-{
+class Paddle : public GDES::Entity{
+
+    public:
+        Paddle(Ball* ball);
+	~Paddle();
+
+	virtual void LoadContent() override;
+	virtual void Update(sf::Time elapsedTime) override;
+	virtual void Draw(sf::RenderWindow* window) override;
+
+    private:
         const float Tau = 0.3f;
         float limitSpeed = 500;
         float speed = 100;
@@ -20,8 +30,9 @@ class Paddle : public GDES::Entity
         float moveTime;
         float limitRight;
         float initialSpeed;
-
- public:
+        int width = 120;
+        int height = 20;
+        Ball* ball;
         sf::RectangleShape rectangle;
         sf::Vector2f position;
 
@@ -29,14 +40,9 @@ class Paddle : public GDES::Entity
         ButtonState *sLeft;
         ButtonState *sRight;
 
-
-	Paddle();
-	~Paddle();
-
-	virtual void LoadContent() override;
-	virtual void Update(sf::Time elapsedTime) override;
-	virtual void Draw(sf::RenderWindow* window) override;
         void Speed(float speedlimit,float Tau);
+
+
 };
 
 #endif // PADDLE_H

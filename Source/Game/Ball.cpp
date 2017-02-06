@@ -4,9 +4,9 @@
 
 Ball::Ball()
 {
-	ball.setRadius(10.f);
-	ball.setPosition(20, 20);
-	ball.setFillColor(Color::Cyan);
+        ball.setRadius(10.f);
+        ball.setPosition(20, 20);
+        ball.setFillColor(Color::Cyan);
     this->caught = false;
     this->direction.x = 1;
     this->direction.y = 1;
@@ -24,10 +24,10 @@ void Ball::Update(sf::Time elapsedTime)
     {
         ball.move(direction * speed * elapsedTime.asSeconds());
 
-        if (CollideX())
+        if (IsCollideX())
             direction.x *= -1;
 
-        if (CollideY())
+        if (IsCollideY())
             direction.y *= -1;
     }
 }
@@ -35,12 +35,19 @@ void Ball::Update(sf::Time elapsedTime)
 
 void Ball::Draw(sf::RenderWindow* window)
 {
-	window->draw(ball);
+        window->draw(ball);
 }
 
-void Ball::Throw(sf::Vector2f* direction, float acceleration)
+void Ball::Capture(sf::Vector2f pos)
 {
-    //this->direction = direction;
+    this->caught = true;
+    SetPos(pos.x, pos.y);
+}
+
+void Ball::Throw(sf::Vector2f direction, float acceleration)
+{
+    this->direction = direction;
+    this->caught = false;
 
 }
 
@@ -49,7 +56,7 @@ void Ball::SetPos(int x, int y)
     this->ball.setPosition(sf::Vector2f(x, y));
 }
 
-bool Ball::CollideX()
+bool Ball::IsCollideX()
 {
     if (ball.getPosition().x + 2 * ball.getRadius() >= (Arkanoid::SCREEN_WIDTH) || ball.getPosition().x <= 0)
     {
@@ -58,7 +65,7 @@ bool Ball::CollideX()
     return false;
 }
 
-bool Ball::CollideY()
+bool Ball::IsCollideY()
 {
     if (ball.getPosition().y + 2 * ball.getRadius() >= (Arkanoid::SCREEN_HEIGHT) || ball.getPosition().y <= 0)
     {
@@ -67,9 +74,17 @@ bool Ball::CollideY()
     return false;
 }
 
+bool Ball::IsCaught()
+{
+    return this->caught;
+}
+
+float Ball::GetRadius()
+{
+    return this->ball.getRadius();
+}
+
 void Ball::LoseBall()
 {
     // Aquí si la bola se pierde en la parte inferior
 }
-
-

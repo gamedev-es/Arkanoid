@@ -3,10 +3,12 @@
 #include "Arkanoid.h"
 #include <SFML\Graphics.hpp>
 #include <SFML/System/Time.hpp>
+#include "Ball.h"
 
 
-Paddle::Paddle(){
-    this->rectangle.setSize(sf::Vector2f(100,20));
+Paddle::Paddle(Ball *ball){
+    this->ball = ball;
+    this->rectangle.setSize(sf::Vector2f(width,height));
     this->position = sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
 
     limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
@@ -18,7 +20,8 @@ Paddle::Paddle(){
 }
 
 Paddle::~Paddle(){
-
+    delete sLeft;
+    delete sRight;
 }
 
 void Paddle::LoadContent(){
@@ -36,6 +39,10 @@ void Paddle::Update(sf::Time elapsedTime){
 		position.x = limitRight;
 	}
 
+        /* =================================================================================================
+         * CONTROLES DE LA PALA
+         *================================================================================================*/
+
         //pulsar izquierda
 	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left)) {
                 this->sLeft->buttonDown = true;
@@ -48,6 +55,7 @@ void Paddle::Update(sf::Time elapsedTime){
                 this->moveTime = sLeft->steadyTime;
                 Speed(-this->limitSpeed,Tau);
 	}
+
         //pulsar derecha
         else if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right)) {
                 sRight->buttonDown = true;
@@ -60,7 +68,7 @@ void Paddle::Update(sf::Time elapsedTime){
                 this->moveTime = sRight->steadyTime;
                 Speed(this->limitSpeed,Tau);
 	}
-        //frenada
+        //frenada (nada pulsado)
         else{
             sRight->buttonDown = false;
             sLeft->buttonDown = false;
@@ -83,6 +91,28 @@ void Paddle::Update(sf::Time elapsedTime){
 
         sRight->timeUpdate(elapsedTime);
         sLeft->timeUpdate(elapsedTime);
+
+        /*CAPTURAR LA BOLA===========================================
+        *Fragmento de codigo correspondiente al saque de la bola
+        *Cuando se encuentra pegada a la paleta
+        *by @scyper ================================================*/
+
+        if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Space)) {
+           this->ball->Capture(sf::Vector2f(position.x + ((width - this->ball->GetRadius()) / 2), position.y - 50));
+        }
+        else
+        {
+           if (this->ball->IsCaught())
+               this->ball->Throw(sf::Vector2f(-1,-1), 0);
+        }
+
+        /*=================================================================
+         * FIN controles
+         * ==============================================================*/
+
+
+
+
 
 }
 

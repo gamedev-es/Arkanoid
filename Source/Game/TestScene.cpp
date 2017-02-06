@@ -5,8 +5,9 @@
 
 void TestScene::Initialize()
 {
-	Paddle* paddle = new Paddle();
-	Ball* ball = new Ball();
-        AddEntity(paddle);
-	AddEntity(ball);
+
+        Ball* ball = new Ball();
+        Paddle* paddle = new Paddle(ball);
+	AddEntity(paddle);
+        AddEntity(ball);
 }
