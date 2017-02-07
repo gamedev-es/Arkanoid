@@ -35,7 +35,7 @@ private:
     sf::CircleShape ball;
     sf::Vector2f direction;
     float   acceleration = 5;
-    float   speed = 400;
+    float   speed = 600;
     bool    caught;
 };
 

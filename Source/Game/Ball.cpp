@@ -1,5 +1,5 @@
 #include "Ball.h"
-
+#include <math.h>
 
 
 Ball::Ball()
@@ -44,9 +44,11 @@ void Ball::Capture(sf::Vector2f pos)
     SetPos(pos.x, pos.y);
 }
 
-void Ball::Throw(sf::Vector2f direction, float acceleration)
+void Ball::Throw(const sf::Vector2f direction, const float acceleration)
 {
-    this->direction = direction;
+    //direccion normalizada
+    this->direction.x = direction.x/sqrt(pow(direction.x,2)+pow(direction.y,2));
+    this->direction.y = direction.y/sqrt(pow(direction.x,2)+pow(direction.y,2));
     this->caught = false;
 
 }

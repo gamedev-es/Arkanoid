@@ -23,16 +23,22 @@ class Paddle : public GDES::Entity{
 	virtual void Draw(sf::RenderWindow* window) override;
 
     private:
+        //movimiento
         const float Tau = 0.3f;
-        float limitSpeed = 500;
-        float speed = 100;
-        float limitLeft = 20;
+        const float limitSpeed = 500;
+        float speed;
         float moveTime;
-        float limitRight;
         float initialSpeed;
+
+        //limites en pantalla
+        const float limitLeft = 20;
+        float limitRight;
+
+        //tamaño raqueta
         int width = 120;
         int height = 20;
-        Ball* ball;
+
+
         sf::RectangleShape rectangle;
         sf::Vector2f position;
 
@@ -40,6 +46,11 @@ class Paddle : public GDES::Entity{
         ButtonState *sLeft;
         ButtonState *sRight;
 
+        //cosas raras
+        Ball* ball;
+        std::default_random_engine generator;
+
+        //metodos privados
         void Speed(float speedlimit,float Tau);
 
 

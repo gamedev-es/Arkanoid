@@ -4,7 +4,8 @@
 #include <SFML\Graphics.hpp>
 #include <SFML/System/Time.hpp>
 #include "Ball.h"
-
+#include <random>
+#include <iostream>
 
 Paddle::Paddle(Ball *ball){
     this->ball = ball;
@@ -37,14 +38,15 @@ void Paddle::Update(sf::Time elapsedTime){
 
         else if (position.x > limitRight) {
 		position.x = limitRight;
-	}
+        }
+
 
         /* =================================================================================================
          * CONTROLES DE LA PALA
          *================================================================================================*/
 
         //pulsar izquierda
-	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left)) {
+        if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left) || Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::A)) {
                 this->sLeft->buttonDown = true;
                 this->sRight->buttonDown = false; //No quiero que esten activados a la vez
 
@@ -57,7 +59,7 @@ void Paddle::Update(sf::Time elapsedTime){
 	}
 
         //pulsar derecha
-        else if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right)) {
+        else if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right) || Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::D)) {
                 sRight->buttonDown = true;
                 sLeft->buttonDown = false; //No quiero que esten activados a la vez
 
@@ -95,15 +97,20 @@ void Paddle::Update(sf::Time elapsedTime){
         /*CAPTURAR LA BOLA===========================================
         *Fragmento de codigo correspondiente al saque de la bola
         *Cuando se encuentra pegada a la paleta
-        *by @scyper ================================================*/
+        *================================================*/
 
         if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Space)) {
-           this->ball->Capture(sf::Vector2f(position.x + ((width - this->ball->GetRadius()) / 2), position.y - 50));
+           this->ball->Capture(sf::Vector2f(this->position.x + ((width/2 - this->ball->GetRadius())), position.y - 50));
         }
         else
         {
-           if (this->ball->IsCaught())
-               this->ball->Throw(sf::Vector2f(-1,-1), 0);
+           if (this->ball->IsCaught()){
+
+               //lanzamiento aleatorio de la bola
+               std::normal_distribution<float> distribution(0.0f,0.3f);
+
+               this->ball->Throw(sf::Vector2f(distribution(generator)+speed*elapsedTime.asSeconds()/7,-1), 0);
+           }
         }
 
         /*=================================================================
