@@ -1,7 +1,7 @@
 #include <math.h>
 #include "Paddle.h"
 #include "Arkanoid.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
 #include "Ball.h"
 #include <random>

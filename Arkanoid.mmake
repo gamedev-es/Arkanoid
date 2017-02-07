@@ -36,34 +36,25 @@
             <Header name="Source/"/>
         </HeaderNode>
         <PkgConfigNode ID="11" outID="19">
-            <Position x="1650" y="179"/>
+            <Position x="1650" y="167"/>
             <PkgConfig name="sfml-window"/>
-            <PkgConfig name="sfml-system"/>
             <PkgConfig name="sfml-graphics"/>
+            <PkgConfig name="sfml-system"/>
+            <PkgConfig name="sfml-audio"/>
         </PkgConfigNode>
         <LinkerNode ID="12" outID="11">
-            <Position x="1400" y="203"/>
+            <Position x="1400" y="191"/>
             <Linker name="stdc++"/>
+            <Linker name="m"/>
         </LinkerNode>
         <CompilerNode ID="13" outID="5">
-            <Position x="500" y="43"/>
-            <Compiler Compiler="C++ Languaje"/>
+            <Position x="500" y="91"/>
             <Option name="Wall"/>
-            <Option name="Werror"/>
-            <Option name="Wextra"/>
-            <Option name="Wno-unused-but-set-variable"/>
-            <Option name="Wpedantic"/>
             <Option name="std=c++11"/>
         </CompilerNode>
         <DebugNode ID="10" extID="14" outID="13">
             <Position x="250" y="113"/>
         </DebugNode>
-        <CompilerNode ID="14" outID="5">
-            <Position x="500" y="291"/>
-            <Compiler Compiler="C++ Languaje"/>
-            <Option name="O3"/>
-            <Option name="std=c++11"/>
-        </CompilerNode>
         <DebugNode ID="8" extID="15" outID="2">
             <Position x="2700" y="363"/>
         </DebugNode>
@@ -100,5 +91,15 @@
             <Path name="Source/Game" Recursive="1"/>
             <Filter name=".cpp"/>
         </SmartFileNode>
+        <CompilerNode ID="14" outID="5">
+            <Position x="500" y="231"/>
+            <Option name="Wall"/>
+            <Option name="Werror"/>
+            <Option name="Wextra"/>
+            <Option name="Wno-unused-but-set-variable"/>
+            <Option name="Wpedantic"/>
+            <Option name="std=c++11"/>
+            <Option name="O3"/>
+        </CompilerNode>
     </Project>
 </MinimalistMake>

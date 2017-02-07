@@ -5,7 +5,7 @@
 
 #include "../GDCore/Entity.h"
 #include <math.h>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
 #include "Paddle.h"
 #include "Arkanoid.h"
