@@ -34,7 +34,7 @@ namespace GDES
 		return true;
 	}
 
-	bool SceneManager::SetCurrentScene(int sceneIndex)
+	bool SceneManager::LoadScene(int sceneIndex)
 	{
 		std::map<int, Scene*>::iterator it = sceneMap.find(sceneIndex);
 
@@ -43,7 +43,7 @@ namespace GDES
 		}
 
 		currentScene = it->second;
-		
+
 		return true;
 	}
 

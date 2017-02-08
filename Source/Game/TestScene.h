@@ -7,13 +7,9 @@
 class TestScene : public GDES::Scene
 {
 public:
-	TestScene() : Scene()
-	{
-		Initialize();
-	}
-
+	TestScene();
 	void Initialize();
 private:
-	
+
 };
 #endif

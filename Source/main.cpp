@@ -6,7 +6,7 @@ using namespace GDES;
 
 int main()
 {
-    Arkanoid game;
-    game.Run();
-    return 0;
+	Arkanoid game;
+	game.Run();
+	return 0;
 }

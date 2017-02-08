@@ -27,29 +27,31 @@ set(CMAKE_MODULE_PATH "${SDK_PATH}/cmake_modules" ${CMAKE_MODULE_PATH})
 # Sources
 set (SourceGroup_Game
 	"${SRC_PATH}/Game/Arkanoid.h"
-  "${SRC_PATH}/Game/Arkanoid.cpp"
-  "${SRC_PATH}/Game/Ball.h"
-  "${SRC_PATH}/Game/Ball.cpp"
-  "${SRC_PATH}/Game/Paddle.h"
-  "${SRC_PATH}/Game/Paddle.cpp"
-  "${SRC_PATH}/Game/TestScene.h"
-  "${SRC_PATH}/Game/TestScene.cpp"
+	"${SRC_PATH}/Game/Arkanoid.cpp"
+	"${SRC_PATH}/Game/Ball.h"
+	"${SRC_PATH}/Game/Ball.cpp"
+	"${SRC_PATH}/Game/Paddle.h"
+	"${SRC_PATH}/Game/Paddle.cpp"
+	"${SRC_PATH}/Game/ButtonState.h"
+	"${SRC_PATH}/Game/ButtonState.cpp"
+	"${SRC_PATH}/Game/TestScene.h"
+	"${SRC_PATH}/Game/TestScene.cpp"
 )
 source_group("Game" FILES ${SourceGroup_Game})
 
 set (SourceGroup_GDCore
 	"${SRC_PATH}/GDCore/Entity.h"
-  "${SRC_PATH}/GDCore/Entity.cpp"
-  "${SRC_PATH}/GDCore/GDCore.h"
-  "${SRC_PATH}/GDCore/GDCore.cpp"
-  "${SRC_PATH}/GDCore/Scene.h"
-  "${SRC_PATH}/GDCore/Scene.cpp"
-  "${SRC_PATH}/GDCore/SceneManager.h"
-  "${SRC_PATH}/GDCore/SceneManager.cpp"
-  "${SRC_PATH}/GDCore/InputManager.h"
-  "${SRC_PATH}/GDCore/InputManager.cpp"
-  "${SRC_PATH}/GDCore/ActionManager.h"
-  "${SRC_PATH}/GDCore/ActionManager.cpp"
+	"${SRC_PATH}/GDCore/Entity.cpp"
+	"${SRC_PATH}/GDCore/GDCore.h"
+	"${SRC_PATH}/GDCore/GDCore.cpp"
+	"${SRC_PATH}/GDCore/Scene.h"
+	"${SRC_PATH}/GDCore/Scene.cpp"
+	"${SRC_PATH}/GDCore/SceneManager.h"
+	"${SRC_PATH}/GDCore/SceneManager.cpp"
+	"${SRC_PATH}/GDCore/InputManager.h"
+	"${SRC_PATH}/GDCore/InputManager.cpp"
+	"${SRC_PATH}/GDCore/ActionManager.h"
+	"${SRC_PATH}/GDCore/ActionManager.cpp"
 )
 source_group("GDCore" FILES ${SourceGroup_GDCore})
 
@@ -59,8 +61,8 @@ set (SourceGroup_Main
 source_group("Main" FILES ${SourceGroup_Main})
 
 set (SOURCE_FILES
-  ${SourceGroup_Game}
-  ${SourceGroup_GDCore}
+	${SourceGroup_Game}
+	${SourceGroup_GDCore}
 	${SourceGroup_Main}
 )
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})

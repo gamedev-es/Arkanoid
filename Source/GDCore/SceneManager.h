@@ -20,7 +20,7 @@ namespace GDES
 		~SceneManager();
 
 		bool AddScene(int sceneIndex, Scene* scene, bool isCurrentScene = false);
-		bool SetCurrentScene(int sceneIndex);
+		bool LoadScene(int sceneIndex);
 		bool RemoveScene(int sceneIndex, bool removeFromMemory);
 		Scene* GetScene(int sceneIndex);
 		Scene* GetCurrentScene() { return currentScene; }
