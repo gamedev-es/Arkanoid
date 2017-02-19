@@ -48,10 +48,6 @@ set (SourceGroup_GDCore
 	"${SRC_PATH}/GDCore/Scene.cpp"
 	"${SRC_PATH}/GDCore/SceneManager.h"
 	"${SRC_PATH}/GDCore/SceneManager.cpp"
-	"${SRC_PATH}/GDCore/InputManager.h"
-	"${SRC_PATH}/GDCore/InputManager.cpp"
-	"${SRC_PATH}/GDCore/ActionManager.h"
-	"${SRC_PATH}/GDCore/ActionManager.cpp"
 )
 source_group("GDCore" FILES ${SourceGroup_GDCore})
 

@@ -1,4 +1,5 @@
 #include "GDCore.h"
+#include <SFML/Window/Event.hpp>
 
 namespace GDES
 {
@@ -49,8 +50,6 @@ namespace GDES
 			case sf::Event::Closed:
 				mWindow.close();
 				break;
-			default:
-				GetInputManager()->HandleEvent(event);
 			}
 		}
 	}
@@ -88,13 +87,6 @@ namespace GDES
 
 	GDCore::~GDCore()
 	{
-		InputManager* inputManager = GetInputManager();
-		if (inputManager)
-		{
-			delete inputManager;
-			inputManager = NULL;
-		}
-
 		SceneManager* sceneManager = GetSceneManager();
 		if (sceneManager)
 		{

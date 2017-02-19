@@ -1,5 +1,3 @@
-#include <SFML/Graphics.hpp>
-
 #include "Game/Arkanoid.h"
 
 using namespace GDES;

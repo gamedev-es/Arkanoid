@@ -6,17 +6,12 @@
 #include <string>
 
 #include <SFML/System/Time.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/String.hpp>
-#include <SFML/Window/Event.hpp>
 
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Entity.h"
-#include "InputManager.h"
 
 namespace GDES
 {
@@ -32,12 +27,6 @@ namespace GDES
 		void SetTitle(const sf::String &title);
 
 		//Singleton
-		static InputManager* GetInputManager()
-		{
-			static InputManager* inputManager = new InputManager();
-			return inputManager;
-		}
-
 		static SceneManager* GetSceneManager()
 		{
 			static SceneManager* sceneManager = new SceneManager();
