@@ -2,6 +2,7 @@
 
 Paddle::Paddle(Ball *ball) {
 	this->ball = ball;
+
 	rectangle.setSize(sf::Vector2f((float)width, (float)height));
 	position = sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
 	limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
@@ -34,7 +35,7 @@ void Paddle::Update(sf::Time elapsedTime) {
 	 *================================================================================================*/
 
 	 //pulsar izquierda
-	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Left) || Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::A)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		sLeft->buttonDown = true;
 		sRight->buttonDown = false; //No quiero que esten activados a la vez
 
@@ -47,7 +48,7 @@ void Paddle::Update(sf::Time elapsedTime) {
 	}
 
 	//pulsar derecha
-	else if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Right) || Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::D)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		sRight->buttonDown = true;
 		sLeft->buttonDown = false; //No quiero que esten activados a la vez
 
@@ -87,7 +88,7 @@ void Paddle::Update(sf::Time elapsedTime) {
 	*Cuando se encuentra pegada a la paleta
 	*================================================*/
 
-	if (Arkanoid::GetInputManager()->IsKeyDown(sf::Keyboard::Space)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		ball->Capture(sf::Vector2f(position.x + ((width / 2 - ball->GetRadius())), position.y - 50));
 	}
 	else
