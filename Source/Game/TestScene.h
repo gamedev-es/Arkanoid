@@ -11,18 +11,16 @@
 class TestScene : public GDES::Scene
 {
 public:
-	TestScene() : Scene()
-	{
-		Initialize();
-	}
+	TestScene();
+	~TestScene();
 
 	void Initialize();
 
 private:
-    void CreateBricks();
+	void CreateBricks();
 
 private:
-    std::vector<Brick*> brickList;
-	
+	std::vector<Brick*> brickList;
+
 };
 #endif
