@@ -2,7 +2,7 @@
 #include "TestScene.h"
 
 Arkanoid::Arkanoid()
-	:GDCore("Arkanoid", Arkanoid::SCREEN_WIDTH, Arkanoid::SCREEN_HEIGHT)
+    :GDCore("Arkanoid", Arkanoid::SCREEN_WIDTH, Arkanoid::SCREEN_HEIGHT)
 {
-	GetSceneManager()->AddScene(SCENES::TEST, new TestScene(), true);
+    GetSceneManager()->AddScene(1, new TestScene(), true);
 }
