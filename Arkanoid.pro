@@ -12,17 +12,13 @@ SOURCES += Source/main.cpp \
     Source/GDCore/GDCore.cpp \
     Source/GDCore/Scene.cpp \
     Source/GDCore/SceneManager.cpp \
-    Source/GDCore/InputManager.cpp \
-    Source/GDCore/ActionManager.cpp \
     Source/Game/ButtonState.cpp \
     Source/Game/HUD.cpp \
     Source/Game/Brick.cpp
 
 HEADERS += \
-    Source/GDCore/ActionManager.h \
     Source/GDCore/Entity.h \
     Source/GDCore/GDCore.h \
-    Source/GDCore/InputManager.h \
     Source/GDCore/Scene.h \
     Source/GDCore/SceneManager.h \
     Source/Game/Arkanoid.h \
