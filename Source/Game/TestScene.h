@@ -7,6 +7,7 @@
 #include "Ball.h"
 #include "ButtonState.h"
 #include "Brick.h"
+#include "Light.h"
 
 class TestScene : public GDES::Scene
 {

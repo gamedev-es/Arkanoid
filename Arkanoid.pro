@@ -14,7 +14,8 @@ SOURCES += Source/main.cpp \
     Source/GDCore/SceneManager.cpp \
     Source/Game/ButtonState.cpp \
     Source/Game/HUD.cpp \
-    Source/Game/Brick.cpp
+    Source/Game/Brick.cpp \
+    Source/Game/Light.cpp
 
 HEADERS += \
     Source/GDCore/Entity.h \
@@ -27,7 +28,8 @@ HEADERS += \
     Source/Game/Paddle.h \
     Source/Game/TestScene.h \
     Source/Game/HUD.h \
-    Source/Game/Brick.h
+    Source/Game/Brick.h \
+    Source/Game/Light.h
 
 
 DEFINES += SFML_STATIC
