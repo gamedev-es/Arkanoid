@@ -15,8 +15,8 @@ struct directional{
 
 struct basics{
     sf::Vector2f position;
-    float intensity;
-    sf::Color color;
+    float bright;
+    sf::Vector3f color;
 };
 
 
@@ -25,7 +25,7 @@ class Light: public GDES::Entity
     public:
 
         //Constructor basico para luz omnidireccional
-        Light(sf::Vector2f position, float intensity, sf::Color color);
+        Light(sf::Vector2f position, float bright, sf::Vector3f);
 
         virtual void LoadContent() override;
         virtual void Update(sf::Time elapsedTime) override;

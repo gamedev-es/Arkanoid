@@ -1,29 +1,33 @@
 #include "light.h"
+#include <SFML/Graphics.hpp>
 
 
 
 
-Light::Light(sf::Vector2f position, float intensity,sf::Color color)
+Light::Light(sf::Vector2f position, float bright,sf::Vector3f color)
 {
     basicLight.position = position;
-    basicLight.intensity = intensity;
+    basicLight.bright = bright;
     basicLight.color = color;
 
     shaderText = \
             "uniform vec2 position;" \
+            "uniform vec3 color;" \
+            "uniform float bright;" \
             "void main()" \
             "{" \
                     "float dist = distance(gl_FragCoord.xy,position);" \
                     "if(true)" \
                     "{" \
                         "gl_FragColor = vec4(0.0,0.0,0.0,1.0);" \
-                        "gl_FragColor.a = 0.5 + 0.5*sin(dist/300);" \
-                        "gl_FragColor.g = exp(-dist/100.0);" \
+                        "gl_FragColor.xyz = (color*exp(-dist/50.0))+((1.0,1.0,1.0)*bright*exp(-dist/20.0)); " \
                     "}" \
             "}";
 
     simpleShader.loadFromMemory(shaderText,sf::Shader::Fragment);
     simpleShader.setUniform("position",basicLight.position);
+    simpleShader.setUniform("color",basicLight.color);
+    simpleShader.setUniform("bright",basicLight.bright);
 }
 
 

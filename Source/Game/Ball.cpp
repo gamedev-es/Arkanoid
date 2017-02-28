@@ -3,12 +3,27 @@
 
 Ball::Ball()
 {
-	ball.setRadius(10.f);
+        ball.setRadius(10.f);
 	ball.setPosition(20, 20);
 	ball.setFillColor(sf::Color::Cyan);
 	caught = false;
 	direction.x = 1;
 	direction.y = 1;
+
+
+        //prueba shader NO ASUSTARSE XD
+        fragmentShader = \
+            "uniform vec3 ballPos;" \
+            "uniform vec2 resolution;" \
+            "void main()" \
+            "{" \
+            "vec2 pixel = gl_FragCoord.xy / resolution.xy;" \
+            "float dist = distance(gl_FragCoord.xy,ballPos.xy);" \
+            "gl_FragColor = vec4(1,1,1,1.0);" \
+            "}";
+
+        shaderDePrueba.loadFromMemory(fragmentShader,sf::Shader::Fragment);
+
 }
 
 void Ball::LoadContent()
@@ -27,14 +42,16 @@ void Ball::Update(sf::Time elapsedTime)
 			direction.x *= -1;
 
 		if (IsCollideY())
-			direction.y *= -1;
+                        direction.y *= -1;
 	}
+        shaderDePrueba.setUniform("ballPos",ball.getPosition()+sf::Vector2f(5,5));
 }
+
 
 
 void Ball::Draw(sf::RenderWindow* window)
 {
-	window->draw(ball);
+        window->draw(ball);
 }
 
 void Ball::Capture(sf::Vector2f pos)

@@ -13,7 +13,7 @@ TestScene::~TestScene()
 void TestScene::Initialize()
 {
 	CreateBricks();
-        Light* light = new Light(sf::Vector2f(250,250),120.0f,sf::Color::Blue);
+        Light* light = new Light(sf::Vector2f(250,250),0.4f,sf::Vector3f(0.2,0.3,1.0));
 	Ball* ball = new Ball();
 	Paddle* paddle = new Paddle(ball);
 

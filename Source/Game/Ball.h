@@ -35,6 +35,11 @@ private:
 	float   acceleration = 5;
 	float   speed = 600;
 	bool    caught;
+
+        //Prueba shader
+        std::string fragmentShader;
+        sf::Shader shaderDePrueba;
+
 };
 
 #endif // BALL_H
