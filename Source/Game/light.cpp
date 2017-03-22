@@ -9,26 +9,25 @@ Light::Light(sf::Vector2f position, float bright,sf::Vector3f color)
     basicLight.position = position;
     basicLight.bright = bright;
     basicLight.color = color;
-
-    shaderText = \
-            "uniform vec2 position;" \
-            "uniform vec3 color;" \
-            "uniform float bright;" \
-            "void main()" \
-            "{" \
-                    "float dist = distance(gl_FragCoord.xy,position);" \
-                    "if(true)" \
-                    "{" \
-                        "gl_FragColor = vec4(0.0,0.0,0.0,1.0);" \
-                        "gl_FragColor.xyz = (color*exp(-dist/50.0))+((1.0,1.0,1.0)*bright*exp(-dist/20.0)); " \
-                    "}" \
-            "}";
+    basicLight.direction = sf::Vector2f(0,0);
+    basicLight.lateralAtenuation = NULL;
 
     simpleShader.loadFromMemory(shaderText,sf::Shader::Fragment);
-    simpleShader.setUniform("position",basicLight.position);
-    simpleShader.setUniform("color",basicLight.color);
-    simpleShader.setUniform("bright",basicLight.bright);
 }
+
+
+Light::Light(sf::Vector2f position, float bright,sf::Vector3f color,sf::Vector2f direction, float lateralAt)
+{
+    basicLight.position = position;
+    basicLight.bright = bright;
+    basicLight.color = color;
+    basicLight.direction = direction;
+    basicLight.lateralAtenuation = lateralAt;
+
+
+    simpleShader.loadFromMemory(shaderText,sf::Shader::Fragment);
+}
+
 
 
 void Light::Draw(sf::RenderWindow* window)
@@ -39,7 +38,13 @@ void Light::Draw(sf::RenderWindow* window)
 
 void Light::Update(sf::Time elapsedTime)
 {
-
+    basicLight.direction += sf::Vector2f(0.1,0);
+    simpleShader.setUniform("position",basicLight.position);
+    simpleShader.setUniform("color",basicLight.color);
+    simpleShader.setUniform("bright",basicLight.bright);
+    simpleShader.setUniform("direction",basicLight.direction);
+    simpleShader.setUniform("lateralAtenuation",basicLight.lateralAtenuation);
+    //simpleShader.setUniform("texture",lightTexture);
 }
 
 void Light::LoadContent()
