@@ -16,8 +16,7 @@ class Light: public GDES::Entity
         //Metodos que añaden luces
         void newLight(sf::Vector2f position, float bright, sf::Vector3f color);
         void newLight(sf::Vector2f position, float bright, sf::Vector3f color, float angle, float angularAt);
-
-
+		
 
         virtual void LoadContent() override;
         virtual void Update(sf::Time elapsedTime) override;
@@ -38,9 +37,17 @@ class Light: public GDES::Entity
         lightSource basicLight;
 
         std::list<lightSource> lightSourcesList;
+		sf::Sprite spriteShader;
 
         sf::Shader simpleShader;
-        std::string shaderText = \
+		std::string vertShader = \
+			"void main()"\
+			"{"\
+			"	gl_TexCoord[0] = gl_MultiTexCoord0;"\
+			"	gl_Position = ftransform();"\
+			"}";
+
+        std::string fragShader = \
                 "uniform sampler2D texture;" \
                 "uniform vec2 position;" \
                 "uniform vec3 color;" \
@@ -66,11 +73,6 @@ class Light: public GDES::Entity
                 "}";
 
         sf::RectangleShape blackLayout;
-
-
-
-
-
 
     };
 

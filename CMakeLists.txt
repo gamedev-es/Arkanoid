@@ -34,6 +34,8 @@ set (SourceGroup_Game
 	"${SRC_PATH}/Game/Paddle.cpp"
 	"${SRC_PATH}/Game/Brick.h"
 	"${SRC_PATH}/Game/Brick.cpp"
+	"${SRC_PATH}/Game/light.h"
+	"${SRC_PATH}/Game/light.cpp"
 	"${SRC_PATH}/Game/ButtonState.h"
 	"${SRC_PATH}/Game/ButtonState.cpp"
 	"${SRC_PATH}/Game/TestScene.h"
