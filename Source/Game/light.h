@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../GDCore/Entity.h"
 #include "Arkanoid.h"
-#include <forward_list>
+#include <list>
 
 
 class Light: public GDES::Entity
@@ -13,10 +13,10 @@ class Light: public GDES::Entity
 
         sf::RenderTexture lightTexture;
 
-        //Constructor basico para luz omnidireccional
-        Light(sf::Vector2f, float, sf::Vector3f);
-        //Constructor para luz direccional
-        Light(sf::Vector2f position, float bright, sf::Vector3f color, sf::Vector2f direction, float lateralAt);
+        //Metodos que añaden luces
+        void newLight(sf::Vector2f position, float bright, sf::Vector3f color);
+        void newLight(sf::Vector2f position, float bright, sf::Vector3f color, float angle, float angularAt);
+
 
 
         virtual void LoadContent() override;
@@ -30,44 +30,42 @@ class Light: public GDES::Entity
             float bright;
             float intensity;
             sf::Vector3f color;
-            sf::Vector2f direction;
-            float lateralAtenuation;
+            float angle;
+            float angularAtenuation;
         };
 
 
         lightSource basicLight;
 
+        std::list<lightSource> lightSourcesList;
+
         sf::Shader simpleShader;
         std::string shaderText = \
+                "uniform sampler2D texture;" \
                 "uniform vec2 position;" \
                 "uniform vec3 color;" \
                 "uniform float bright;" \
-                "uniform vec2 direction;" \
-                "uniform float lateralAtenuation;" \
+                "uniform float angle;" \
+                "uniform float angularAtenuation;" \
                 "void main()" \
                 "{" \
                         "float dist = distance(gl_FragCoord.xy,position);" \
-                        "float isThereDirection = distance(direction,vec2(0,0));" \
-                        "gl_FragColor = vec4(0,0,0,1);" \
-                        "if(isThereDirection <0.1)" \
+                        "gl_FragColor = texture2D(texture,gl_FragCoord.xy);" \
+                        "if(angularAtenuation <0.001)" \
                         "{" \
-                            "gl_FragColor.xyz = (color*exp(-dist/50.0))+((1.0,1.0,1.0)*bright*exp(-dist/20.0)); " \
+                            "gl_FragColor.xyz += (color*exp(-dist/50.0))+((1.0,1.0,1.0)*bright*exp(-dist/20.0)); " \
                         "}" \
                         "else" \
                         "{" \
-                            "float dotProd = dot(gl_FragCoord.xy-position,direction);" \
-                            "float modules = length(direction) * length(gl_FragCoord.xy-position);" \
-                            "float cosAlpha = dotProd/modules;" \
-                            "if(cosAlpha>lateralAtenuation)" \
+                            "float pixelAngle = atan((gl_FragCoord.xy-position).y,(gl_FragCoord.xy-position).x);" \
+                            "if(abs(pixelAngle-radians(angle))<radians(angularAtenuation))" \
                             "{" \
-                                "gl_FragColor.xyz = (color*exp(-dist/250.0))+((1.0,1.0,1.0)*bright*exp(-dist/20.0));" \
+                                "gl_FragColor.xyz += (color*exp(-dist/150.0)*exp(-abs(pixelAngle-radians(angle))))+((1.0,1.0,1.0)*bright*exp(-dist/20.0));" \
                             "}" \
                         "}" \
                 "}";
 
         sf::RectangleShape blackLayout;
-
-        //forward_list<lightSource> lightList;
 
 
 
