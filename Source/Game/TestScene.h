@@ -16,12 +16,14 @@ public:
 	~TestScene();
 
 	void Initialize();
+	virtual void Draw(sf::RenderWindow* window) override;
 
 private:
 	void CreateBricks();
 
 private:
 	std::vector<Brick*> brickList;
-
+	sf::Texture* bgTexture;
+	sf::Sprite bgSprite;
 };
 #endif

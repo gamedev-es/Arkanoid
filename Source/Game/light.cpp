@@ -30,6 +30,8 @@ void Light::newLight(sf::Vector2f position, float bright, sf::Vector3f color, fl
 
 void Light::Draw(sf::RenderWindow* window)
 {
+	//window->draw(blackLayout);
+	//window->draw(vertices, 4, sf::Quads, &simpleShader);
 	window->draw(spriteShader, sf::BlendMultiply);
 	//window->draw(spriteShader);
 }
@@ -44,21 +46,26 @@ void Light::Update(sf::Time elapsedTime)
 	for (std::list<lightSource>::iterator lightIterator = lightSourcesList.begin(); lightIterator !=
 		lightSourcesList.end(); ++lightIterator)
 	{
+
 		simpleShader.setUniform("position", lightIterator->position);
 		simpleShader.setUniform("color", lightIterator->color);
 		simpleShader.setUniform("bright", lightIterator->bright);
+		simpleShader.setUniform("intensity", lightIterator->intensity);
+		simpleShader.setUniform("ScreenWidth", (float)Arkanoid::SCREEN_WIDTH);
+		simpleShader.setUniform("ScreenHeight", (float)Arkanoid::SCREEN_HEIGHT);
+		simpleShader.setUniform("radius", lightIterator->radius);
 		simpleShader.setUniform("angle", lightIterator->angle);
 		simpleShader.setUniform("angularAtenuation", lightIterator->angularAtenuation);
-		simpleShader.setUniform("texture", &lightTexture); // <<-- hay un problema con esto que hace 
-														   // que todo el fondo este negro y se sobrepone 
-														   // encima de la anterior, debes revisar el shader
+		simpleShader.setUniform("texture", &lightTexture);
 
-		lightTexture.draw(blackLayout, &simpleShader);   //posiblemente el problema esté aquí
+		//lightTexture.draw(blackLayout, &simpleShader);
+		lightTexture.draw(vertices, 4, sf::Quads, &simpleShader);
+		//Para usar esto, pon un breakpoint, dale continue hasta que count = 0 nuevamente
 		//lightTexture.getTexture().copyToImage().saveToFile("lightTexture_"+std::to_string(count)+".png");
 		count++;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
 	{
 		lightTexture.getTexture().copyToImage().saveToFile("lightTexture.png");
 	}
@@ -70,11 +77,32 @@ void Light::Update(sf::Time elapsedTime)
 void Light::LoadContent()
 {
 	lightTexture.create(Arkanoid::SCREEN_WIDTH, Arkanoid::SCREEN_HEIGHT);
+	lightTexture.setSmooth(true);
 	blackLayout.setPosition(sf::Vector2f(0, 0));
 	blackLayout.setFillColor(sf::Color::Black);
 	blackLayout.setSize(sf::Vector2f(Arkanoid::SCREEN_WIDTH, Arkanoid::SCREEN_HEIGHT));
 
-	//simpleShader.loadFromMemory(vertShader, fragShader);
-	simpleShader.loadFromMemory(fragShader, sf::Shader::Fragment);
+	//simpleShader.loadFromFile("Shaders/GatoShader.frag", sf::Shader::Fragment);
+	//simpleShader.loadFromFile("Shaders/PointLightA.vert", "Shaders/PointLightA.frag");
+	simpleShader.loadFromFile("Shaders/PointLightB.frag", sf::Shader::Fragment);
+
+	struct Rect {
+		int x;
+		int y;
+		int width;
+		int height;
+	};
+
+	Rect quad;
+
+	quad.x = 0;
+	quad.y = 0;
+	quad.width = quad.x + Arkanoid::SCREEN_WIDTH;
+	quad.height = quad.y + Arkanoid::SCREEN_HEIGHT;
+
+	vertices[0] = sf::Vertex(sf::Vector2f(quad.x, quad.y), sf::Vector2f(0, 0));
+	vertices[1] = sf::Vertex(sf::Vector2f(quad.width, quad.y), sf::Vector2f(1, 0));
+	vertices[2] = sf::Vertex(sf::Vector2f(quad.width, quad.height), sf::Vector2f(1, 1));
+	vertices[3] = sf::Vertex(sf::Vector2f(quad.x, quad.height), sf::Vector2f(0, 1));
 
 }

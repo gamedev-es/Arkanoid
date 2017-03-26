@@ -7,18 +7,27 @@ TestScene::TestScene() : Scene()
 
 TestScene::~TestScene()
 {
-
+	if (bgTexture) {
+		delete bgTexture;
+		bgTexture = nullptr;
+	}
 }
 
 void TestScene::Initialize()
 {
+
+	bgTexture = new sf::Texture();
+	bgTexture->loadFromFile("Textures/floortiled.png");
+	bgSprite.setTexture((*bgTexture));
+	bgSprite.setPosition(0, 0);
+
 	CreateBricks();
 
 	Light* light = new Light();
 
-	//light->newLight(sf::Vector2f(250, 250), 0.4f, sf::Vector3f(1, 0.0, 0.7), 0, 0);
-	light->newLight(sf::Vector2f(500, 500), 0.4f, sf::Vector3f(1, 0.0, 0.7), 0, 0);
-	light->newLight(sf::Vector2f(0, 500), 1.0f, sf::Vector3f(0, 1, 0), 0, 0);
+	light->newLight(sf::Vector2f(400, 100), 0.4f, sf::Vector3f(1, 0, 0), 0, 0);
+	light->newLight(sf::Vector2f(400, 300), 0.4f, sf::Vector3f(0, 1, 0), 0, 0);
+	light->newLight(sf::Vector2f(400, 500), 1.0f, sf::Vector3f(0, 0, 1), 0, 0);
 
 	Ball* ball = new Ball();
 	Paddle* paddle = new Paddle(ball);
@@ -49,4 +58,10 @@ void TestScene::CreateBricks()
 		xPos = 20;
 		yPos += 20 + 1;
 	}
+}
+
+
+void TestScene::Draw(sf::RenderWindow* window) {
+	window->draw(bgSprite);
+	Scene::Draw(window);
 }
