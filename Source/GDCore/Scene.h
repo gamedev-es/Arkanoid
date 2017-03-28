@@ -12,8 +12,8 @@ namespace GDES
 	class Scene
 	{
 	public:
-		Scene();
-		~Scene();
+		Scene() =default;
+		virtual ~Scene();
 
 		virtual void Update(sf::Time elapsedTime);
 		virtual void Draw(sf::RenderWindow* window);

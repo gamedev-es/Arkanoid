@@ -10,8 +10,8 @@ namespace GDES
 	class Entity
 	{
 	public:
-		Entity();
-		~Entity();
+		Entity() =default;
+		virtual ~Entity() =default;
 
 		virtual void LoadContent() = 0;
 		virtual void Update(sf::Time elapsedTime) = 0;
