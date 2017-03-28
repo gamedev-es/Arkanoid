@@ -2,12 +2,4 @@
 
 namespace GDES
 {
-	Entity::Entity()
-	{
-
-	}
-	Entity::~Entity()
-	{
-
-	}
 }

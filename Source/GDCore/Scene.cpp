@@ -2,10 +2,6 @@
 
 namespace GDES
 {
-	Scene::Scene()
-	{
-
-	}
 	Scene::~Scene()
 	{
 		std::vector<Entity *>::const_iterator it;
