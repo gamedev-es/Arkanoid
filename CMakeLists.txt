@@ -11,6 +11,10 @@ endif()
 
 set (CMAKE_CXX_STANDARD 11)
 
+if(NOT ${MSVC})
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+endif(NOT ${MSVC})
+
 project(${EXECUTABLE_NAME})
 
 # Set Variables and SDKs Folders
@@ -25,39 +29,22 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
 set(CMAKE_MODULE_PATH "${SDK_PATH}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 # Sources
-set (SourceGroup_Game
-	"${SRC_PATH}/Game/Arkanoid.h"
-	"${SRC_PATH}/Game/Arkanoid.cpp"
-	"${SRC_PATH}/Game/Ball.h"
-	"${SRC_PATH}/Game/Ball.cpp"
-	"${SRC_PATH}/Game/Paddle.h"
-	"${SRC_PATH}/Game/Paddle.cpp"
-	"${SRC_PATH}/Game/Brick.h"
-	"${SRC_PATH}/Game/Brick.cpp"
-	"${SRC_PATH}/Game/light.h"
-	"${SRC_PATH}/Game/light.cpp"
-	"${SRC_PATH}/Game/ButtonState.h"
-	"${SRC_PATH}/Game/ButtonState.cpp"
-	"${SRC_PATH}/Game/TestScene.h"
-	"${SRC_PATH}/Game/TestScene.cpp"
+FILE(GLOB SourceGroup_Game
+    "${SRC_PATH}/Game/*.h"
+    "${SRC_PATH}/Game/*.cpp"
 )
-source_group("Game" FILES ${SourceGroup_Game})
 
-set (SourceGroup_GDCore
-	"${SRC_PATH}/GDCore/Entity.h"
-	"${SRC_PATH}/GDCore/Entity.cpp"
-	"${SRC_PATH}/GDCore/GDCore.h"
-	"${SRC_PATH}/GDCore/GDCore.cpp"
-	"${SRC_PATH}/GDCore/Scene.h"
-	"${SRC_PATH}/GDCore/Scene.cpp"
-	"${SRC_PATH}/GDCore/SceneManager.h"
-	"${SRC_PATH}/GDCore/SceneManager.cpp"
+FILE(GLOB SourceGroup_GDCore
+    "${SRC_PATH}/GDCore/*.h"
+    "${SRC_PATH}/GDCore/*.cpp"
 )
-source_group("GDCore" FILES ${SourceGroup_GDCore})
-
 set (SourceGroup_Main
-	"${SRC_PATH}/main.cpp"
+    "${SRC_PATH}/main.cpp"
 )
+
+# Filters
+source_group("Game" FILES ${SourceGroup_Game})
+source_group("GDCore" FILES ${SourceGroup_GDCore})
 source_group("Main" FILES ${SourceGroup_Main})
 
 set (SOURCE_FILES

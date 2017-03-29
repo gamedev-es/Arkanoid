@@ -17,7 +17,7 @@ void TestScene::Initialize()
 {
 
 	bgTexture = new sf::Texture();
-	bgTexture->loadFromFile("Textures/floortiled.png");
+	bgTexture->loadFromFile("Assets/Textures/floortiled.png");
 	bgSprite.setTexture((*bgTexture));
 	bgSprite.setPosition(0, 0);
 

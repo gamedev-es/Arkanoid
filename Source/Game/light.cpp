@@ -82,9 +82,9 @@ void Light::LoadContent()
 	blackLayout.setFillColor(sf::Color::Black);
 	blackLayout.setSize(sf::Vector2f(Arkanoid::SCREEN_WIDTH, Arkanoid::SCREEN_HEIGHT));
 
-	//simpleShader.loadFromFile("Shaders/GatoShader.frag", sf::Shader::Fragment);
-	//simpleShader.loadFromFile("Shaders/PointLightA.vert", "Shaders/PointLightA.frag");
-	simpleShader.loadFromFile("Shaders/PointLightB.frag", sf::Shader::Fragment);
+	//simpleShader.loadFromFile("Assets/Shaders/GatoShader.frag", sf::Shader::Fragment);
+	//simpleShader.loadFromFile("Assets/Shaders/PointLightA.vert", "Shaders/PointLightA.frag");
+	simpleShader.loadFromFile("Assets/Shaders/PointLightB.frag", sf::Shader::Fragment);
 
 	struct Rect {
 		int x;

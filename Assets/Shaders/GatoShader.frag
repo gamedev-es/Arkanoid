@@ -20,4 +20,4 @@ void main()
                 gl_FragColor.xyz += (color*exp(-dist/150.0)*exp(-abs(pixelAngle-radians(angle))))+((1.0,1.0,1.0)*bright*exp(-dist/20.0)); 
             } 
         } 
-};
+}
