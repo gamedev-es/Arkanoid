@@ -11,9 +11,9 @@ endif()
 
 set (CMAKE_CXX_STANDARD 11)
 
-if(NOT MSVC)
+if(NOT ${MSVC})
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
-endif(NOT MSVC)
+endif(NOT ${MSVC})
 
 project(${EXECUTABLE_NAME})
 
