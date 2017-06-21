@@ -6,7 +6,6 @@
 namespace GDES {
 class SceneManager {
   public:
-    SceneManager();
     ~SceneManager();
 
     bool AddScene(int sceneIndex, Scene* scene, bool isCurrentScene = false);
@@ -18,7 +17,7 @@ class SceneManager {
     }
 
   private:
-    Scene* currentScene;
+    Scene* currentScene{nullptr};
     std::map<int, Scene*> sceneMap;
 };
 }

@@ -1,10 +1,6 @@
 #include "SceneManager.h"
 
 namespace GDES {
-SceneManager::SceneManager() {
-    currentScene = NULL;
-}
-
 SceneManager::~SceneManager() {
     for(auto& s : sceneMap) {
         Scene* scene = s.second;

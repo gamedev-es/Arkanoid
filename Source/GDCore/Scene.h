@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Time.hpp>
 
@@ -8,14 +10,13 @@
 namespace GDES {
 class Scene {
   public:
-    Scene() = default;
-    virtual ~Scene();
+    virtual ~Scene() = default;
 
     virtual void Update(sf::Time elapsedTime);
     virtual void Draw(sf::RenderWindow* window);
-    virtual void AddEntity(Entity* entity);
+    virtual void AddEntity(std::unique_ptr<Entity>&& entity);
 
   private:
-    std::vector<Entity*> entityList;
+    std::vector<std::unique_ptr<Entity>> entityList;
 };
 }

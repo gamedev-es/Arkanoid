@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
 #include <math.h>
+#include <memory>
 #include <random>
 
 #include "../GDCore/Entity.h"
@@ -15,11 +16,10 @@ class Paddle : public GDES::Entity {
 
   public:
     Paddle(Ball* ball);
-    ~Paddle();
 
-    virtual void LoadContent() override;
-    virtual void Update(sf::Time elapsedTime) override;
-    virtual void Draw(sf::RenderWindow* window) override;
+    void LoadContent() override;
+    void Update(sf::Time elapsedTime) override;
+    void Draw(sf::RenderWindow* window) override;
 
   private:
     // movimiento
@@ -41,8 +41,8 @@ class Paddle : public GDES::Entity {
     sf::Vector2f position;
 
     // objetos para controlar la duración de las pulsaciones
-    ButtonState* sLeft;
-    ButtonState* sRight;
+    std::unique_ptr<ButtonState> sLeft{new ButtonState()};
+    std::unique_ptr<ButtonState> sRight{new ButtonState()};
 
     // cosas raras
     Ball* ball;

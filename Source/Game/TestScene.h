@@ -9,13 +9,9 @@
 class TestScene : public GDES::Scene {
   public:
     TestScene();
-    ~TestScene();
 
     void Initialize();
 
   private:
     void CreateBricks();
-
-  private:
-    std::vector<Brick*> brickList;
 };

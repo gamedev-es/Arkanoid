@@ -1,19 +1,9 @@
 #include "Scene.h"
 
 namespace GDES {
-Scene::~Scene() {
-    for(auto& e : entityList) {
-        Entity* entity = e;
-        delete entity;
-        entity = nullptr;
-    }
-
-    entityList.clear();
-}
-
-void Scene::AddEntity(Entity* entity) {
+void Scene::AddEntity(std::unique_ptr<Entity>&& entity) {
     entity->LoadContent();
-    entityList.push_back(entity);
+    entityList.emplace_back(std::move(entity));
 }
 
 void Scene::Update(sf::Time elapsedTime) {

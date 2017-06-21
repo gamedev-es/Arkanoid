@@ -1,20 +1,19 @@
+#include <memory>
+
 #include "TestScene.h"
 
-TestScene::TestScene() : Scene() {
+TestScene::TestScene() {
     Initialize();
-}
-
-TestScene::~TestScene() {
 }
 
 void TestScene::Initialize() {
     CreateBricks();
 
-    Ball* ball = new Ball();
-    Paddle* paddle = new Paddle(ball);
+    auto* ball = new Ball();
+    auto paddle = std::make_unique<Paddle>(ball);
 
-    AddEntity(paddle);
-    AddEntity(ball);
+    AddEntity(std::move(paddle));
+    AddEntity(std::unique_ptr<Ball>(ball));
 }
 
 void TestScene::CreateBricks() {
@@ -24,12 +23,10 @@ void TestScene::CreateBricks() {
     for(int v = 0; v < 5; v++) {
         for(int h = 0; h < 12; h++) {
             auto color = (h % 2) ? sf::Color::Red : sf::Color::Yellow;
-            Brick* brick = new Brick(xPos, yPos, color);
-
-            brickList.emplace_back(brick);
-            AddEntity(brick);
-
+            auto brick = std::make_unique<Brick>(xPos, yPos, color);
             xPos += brick->GetWidth() + 1;
+
+            AddEntity(std::move(brick));
         }
         xPos = 20;
         yPos += 20 + 1;

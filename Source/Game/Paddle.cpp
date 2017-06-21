@@ -1,19 +1,9 @@
 #include "Paddle.h"
 
 Paddle::Paddle(Ball* b) : ball(b) {
-
     rectangle.setSize(sf::Vector2f(width, height));
     position = sf::Vector2f(100, SCREEN_HEIGHT - (rectangle.getSize().y * 2));
     limitRight = (SCREEN_WIDTH - rectangle.getSize().x) - 20;
-
-    // objetos para controlar la duración de las pulsaciones
-    sLeft = new ButtonState();
-    sRight = new ButtonState();
-}
-
-Paddle::~Paddle() {
-    delete sLeft;
-    delete sRight;
 }
 
 void Paddle::LoadContent() {
