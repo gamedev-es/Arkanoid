@@ -1,9 +1,6 @@
-#ifndef HUD_H
-#define HUD_H
+#pragma once
 
 class HUD {
   public:
     HUD();
 };
-
-#endif // HUD_H

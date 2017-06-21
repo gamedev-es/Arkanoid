@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PADDLE_H
-#define PADDLE_H
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
@@ -36,8 +34,8 @@ class Paddle : public GDES::Entity {
     float limitRight = 0;
 
     // tamaño raqueta
-    int width = 120;
-    int height = 20;
+    unsigned width = 120;
+    unsigned height = 20;
 
     sf::RectangleShape rectangle;
     sf::Vector2f position;
@@ -53,5 +51,3 @@ class Paddle : public GDES::Entity {
     // metodos privados
     void Speed(float speedlimit, float tau);
 };
-
-#endif // PADDLE_H

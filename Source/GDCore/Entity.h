@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ENTITY_H
-#define ENTITY_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Time.hpp>
@@ -16,5 +14,3 @@ class Entity {
     virtual void Draw(sf::RenderWindow* window) = 0;
 };
 }
-
-#endif // ENTITY_H

@@ -2,12 +2,12 @@
 
 namespace GDES {
 Scene::~Scene() {
-    std::vector<Entity*>::const_iterator it;
-    for(it = entityList.begin(); it != entityList.end(); ++it) {
-        Entity* entity = (*it);
+    for(auto& e : entityList) {
+        Entity* entity = e;
         delete entity;
-        entity = NULL;
+        entity = nullptr;
     }
+
     entityList.clear();
 }
 
@@ -17,10 +17,7 @@ void Scene::AddEntity(Entity* entity) {
 }
 
 void Scene::Update(sf::Time elapsedTime) {
-    std::vector<Entity*>::const_iterator it;
-    for(it = entityList.begin(); it != entityList.end(); ++it) {
-        (*it)->Update(elapsedTime);
-    }
+    for(auto& e : entityList) e->Update(elapsedTime);
 }
 
 void Scene::Draw(sf::RenderWindow* window) {
@@ -29,9 +26,6 @@ void Scene::Draw(sf::RenderWindow* window) {
         return; // Nada que dibujar
     }
 
-    std::vector<Entity*>::const_iterator it;
-    for(it = entityList.begin(); it != entityList.end(); ++it) {
-        (*it)->Draw(window);
-    }
+    for(auto& e : entityList) e->Draw(window);
 }
-}
+} // namespace GDES

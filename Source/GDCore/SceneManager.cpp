@@ -6,11 +6,10 @@ SceneManager::SceneManager() {
 }
 
 SceneManager::~SceneManager() {
-    std::map<int, Scene*>::const_iterator it;
-    for(it = sceneMap.begin(); it != sceneMap.end(); ++it) {
-        Scene* scene = it->second;
+    for(auto& s : sceneMap) {
+        Scene* scene = s.second;
         delete scene;
-        scene = NULL;
+        scene = nullptr;
     }
     sceneMap.clear();
 }

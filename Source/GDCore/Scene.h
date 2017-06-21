@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENE_H
-#define SCENE_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Time.hpp>
@@ -21,5 +19,3 @@ class Scene {
     std::vector<Entity*> entityList;
 };
 }
-
-#endif // SCENE_H

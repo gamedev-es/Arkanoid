@@ -1,12 +1,10 @@
 #include "Paddle.h"
 
-Paddle::Paddle(Ball* ball) {
-    this->ball = ball;
+Paddle::Paddle(Ball* b) : ball(b) {
 
-    rectangle.setSize(sf::Vector2f((float)width, (float)height));
-    position =
-        sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
-    limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
+    rectangle.setSize(sf::Vector2f(width, height));
+    position = sf::Vector2f(100, Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2));
+    limitRight = (Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20;
 
     // objetos para controlar la duración de las pulsaciones
     sLeft = new ButtonState();
@@ -93,7 +91,7 @@ void Paddle::Update(sf::Time elapsedTime) {
     *================================================*/
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        ball->Capture(sf::Vector2f(position.x + ((width / 2 - ball->GetRadius())),
+        ball->Capture(sf::Vector2f(position.x + (width / 2 - ball->GetRadius()),
                                    position.y - 50));
     } else {
         if(ball->IsCaught()) {
@@ -101,10 +99,9 @@ void Paddle::Update(sf::Time elapsedTime) {
             // lanzamiento aleatorio de la bola
             std::normal_distribution<float> distribution(0.0f, 0.3f);
 
-            ball->Throw(sf::Vector2f(distribution(generator) +
-                                         speed * elapsedTime.asSeconds() / 7,
-                                     -1),
-                        0);
+            auto direction = sf::Vector2f(
+                distribution(generator) + speed * elapsedTime.asSeconds() / 7, -1);
+            ball->Throw(direction, 0);
         }
     }
 

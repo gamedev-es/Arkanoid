@@ -45,7 +45,7 @@ void GDCore::ProcessEvents() {
 }
 
 void GDCore::Update(sf::Time elapsedTime) {
-    if(GetSceneManager()->GetCurrentScene() != NULL) {
+    if(GetSceneManager()->GetCurrentScene() != nullptr) {
         GetSceneManager()->GetCurrentScene()->Update(elapsedTime);
     }
 }
@@ -53,7 +53,7 @@ void GDCore::Update(sf::Time elapsedTime) {
 void GDCore::Render() {
     mWindow.clear();
 
-    if(GetSceneManager()->GetCurrentScene() != NULL) {
+    if(GetSceneManager()->GetCurrentScene() != nullptr) {
         GetSceneManager()->GetCurrentScene()->Draw(&mWindow);
     }
 
@@ -72,7 +72,7 @@ GDCore::~GDCore() {
     SceneManager* sceneManager = GetSceneManager();
     if(sceneManager) {
         delete sceneManager;
-        sceneManager = NULL;
+        sceneManager = nullptr;
     }
 }
 }

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENEMANAGER_H
-#define SCENEMANAGER_H
 
 #include "Scene.h"
 #include <map>
@@ -24,5 +22,3 @@ class SceneManager {
     std::map<int, Scene*> sceneMap;
 };
 }
-
-#endif // SCENEMANAGER_H

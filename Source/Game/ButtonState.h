@@ -1,5 +1,4 @@
-#ifndef BUTTONSTATE_H
-#define BUTTONSTATE_H
+#pragma once
 
 #include <SFML/System/Time.hpp>
 #include <iostream>
@@ -22,5 +21,3 @@ class ButtonState {
     float steadyTime = 0;
     bool stateChange = false;
 };
-
-#endif // BUTTONSTATE_H

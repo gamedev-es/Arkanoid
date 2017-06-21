@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TESTSCENE_H
-#define TESTSCENE_H
 
 #include "../GDCore/Scene.h"
 #include "Ball.h"
@@ -21,4 +19,3 @@ class TestScene : public GDES::Scene {
   private:
     std::vector<Brick*> brickList;
 };
-#endif

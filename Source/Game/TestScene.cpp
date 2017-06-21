@@ -18,15 +18,15 @@ void TestScene::Initialize() {
 }
 
 void TestScene::CreateBricks() {
-    int xPos = 20;
-    int yPos = 50;
+    unsigned xPos = 20;
+    unsigned yPos = 50;
 
     for(int v = 0; v < 5; v++) {
         for(int h = 0; h < 12; h++) {
-            Brick* brick = new Brick(
-                xPos, yPos, ((h % 2) == 0) ? sf::Color::Yellow : sf::Color::Red);
+            auto color = (h % 2) ? sf::Color::Red : sf::Color::Yellow;
+            Brick* brick = new Brick(xPos, yPos, color);
 
-            brickList.push_back(brick);
+            brickList.emplace_back(brick);
             AddEntity(brick);
 
             xPos += brick->GetWidth() + 1;
