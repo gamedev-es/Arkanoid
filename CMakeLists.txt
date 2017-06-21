@@ -90,9 +90,27 @@ if (WIN32)
   )
 endif(WIN32)
 
+# cppcheck
+find_program(CPPCHECK_BIN cppcheck)
+if(EXISTS ${CPPCHECK_BIN})
+  add_custom_target(cppcheck
+          COMMAND cppcheck
+          --enable=all 
+          ${SOURCE_FILES}
+          --suppress=missingIncludeSystem --suppress=unusedFunction --suppress=unmatchedSuppression
+          -v -q --error-exitcode=2 --language=c++
+          --template='[{file}:{line}] [{severity},{id}] {message}'
+          --suppress=unusedStructMember
+  )
+
+  add_dependencies(${EXECUTABLE_NAME} cppcheck)
+else()
+  message(AUTHOR_WARNING "cppcheck is not installed, some checks will not be performed")
+endif()
+
+
 
 # clang-format
-
 file(GLOB CLANG_FORMAT_FILE .clang-format)
 find_program(CLANG_FORMAT clang-format) 
 if(EXISTS ${CLANG_FORMAT})

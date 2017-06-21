@@ -6,6 +6,7 @@
 namespace GDES {
 class SceneManager {
   public:
+    SceneManager() = default;
     ~SceneManager();
 
     bool AddScene(int sceneIndex, Scene* scene, bool isCurrentScene = false);

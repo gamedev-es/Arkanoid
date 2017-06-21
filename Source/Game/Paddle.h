@@ -15,7 +15,7 @@
 class Paddle : public GDES::Entity {
 
   public:
-    Paddle(Ball* ball);
+    explicit Paddle(Ball* ball);
 
     void LoadContent() override;
     void Update(sf::Time elapsedTime) override;
@@ -25,9 +25,9 @@ class Paddle : public GDES::Entity {
     // movimiento
     const float TAU = 0.3f;
     const float LIMIT_SPEED = 500;
-    float speed;
-    float moveTime;
-    float initialSpeed;
+    float speed{0};
+    float moveTime{0};
+    float initialSpeed{0};
 
     // limites en pantalla
     float limitLeft = 20;
