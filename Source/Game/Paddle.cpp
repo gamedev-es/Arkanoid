@@ -3,8 +3,8 @@
 Paddle::Paddle(Ball* b) : ball(b) {
 
     rectangle.setSize(sf::Vector2f(width, height));
-    position = sf::Vector2f(100, Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2));
-    limitRight = (Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20;
+    position = sf::Vector2f(100, SCREEN_HEIGHT - (rectangle.getSize().y * 2));
+    limitRight = (SCREEN_WIDTH - rectangle.getSize().x) - 20;
 
     // objetos para controlar la duración de las pulsaciones
     sLeft = new ButtonState();
@@ -105,9 +105,8 @@ void Paddle::Update(sf::Time elapsedTime) {
         }
     }
 
-    /*=================================================================
-     * FIN controles
-     * ==============================================================*/
+    ball->updatePaddlePos(sf::Vector2u(position.x, position.y));
+    ball->updatePaddleSize(sf::Vector2u(width, height));
 }
 
 void Paddle::Draw(sf::RenderWindow* window) {

@@ -2,12 +2,13 @@
 
 #include "../GDCore/GDCore.h"
 
+constexpr unsigned SCREEN_WIDTH = 800;
+constexpr unsigned SCREEN_HEIGHT = 600;
+
 class Arkanoid : public GDES::GDCore {
   public:
     Arkanoid();
 
   public:
     enum SCENES { TEST = 0 };
-    static const unsigned int SCREEN_WIDTH = 800;
-    static const unsigned int SCREEN_HEIGHT = 600;
 };

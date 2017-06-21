@@ -13,6 +13,8 @@ class Ball : public GDES::Entity {
     virtual void Draw(sf::RenderWindow* window) override;
 
   public:
+    void updatePaddlePos(const sf::Vector2u new_pos);
+    void updatePaddleSize(const sf::Vector2u new_pos);
     void Throw(sf::Vector2f direction, float acceleration);
     void Capture(sf::Vector2f pos);
     bool IsCaught() const;
@@ -21,6 +23,7 @@ class Ball : public GDES::Entity {
   private:
     bool IsCollideX() const;
     bool IsCollideY() const;
+    bool isPaddleCollide() const;
 
     void LoseBall();
     void SetPos(float x, float y);
@@ -31,4 +34,7 @@ class Ball : public GDES::Entity {
     float acceleration = 5;
     float speed = 600;
     bool caught{false};
+
+    sf::Vector2u paddle_position{SCREEN_WIDTH, SCREEN_HEIGHT};
+    sf::Vector2u paddle_size{0, 0};
 };
