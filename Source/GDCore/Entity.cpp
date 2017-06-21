@@ -1,5 +1,3 @@
 #include "Entity.h"
 
-namespace GDES
-{
-}
+namespace GDES {}

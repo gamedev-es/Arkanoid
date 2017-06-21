@@ -3,24 +3,22 @@
 #define TESTSCENE_H
 
 #include "../GDCore/Scene.h"
-#include "Paddle.h"
 #include "Ball.h"
-#include "ButtonState.h"
 #include "Brick.h"
+#include "ButtonState.h"
+#include "Paddle.h"
 
-class TestScene : public GDES::Scene
-{
-public:
-	TestScene();
-	~TestScene();
+class TestScene : public GDES::Scene {
+  public:
+    TestScene();
+    ~TestScene();
 
-	void Initialize();
+    void Initialize();
 
-private:
-	void CreateBricks();
+  private:
+    void CreateBricks();
 
-private:
-	std::vector<Brick*> brickList;
-
+  private:
+    std::vector<Brick*> brickList;
 };
 #endif

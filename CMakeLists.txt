@@ -89,3 +89,22 @@ if (WIN32)
     COMMENT "Copying SFML libraries" VERBATIM
   )
 endif(WIN32)
+
+
+# clang-format
+
+file(GLOB CLANG_FORMAT_FILE .clang-format)
+find_program(CLANG_FORMAT clang-format) 
+if(EXISTS ${CLANG_FORMAT})
+  add_custom_target(clangformat
+        COMMAND clang-format
+        -style=file
+        -assume-filename=${CLANG_FORMAT_FILE}
+        -i
+        ${SOURCE_FILES}
+  )
+
+  add_dependencies(${EXECUTABLE_NAME} clangformat)
+else()
+  message(AUTHOR_WARNING "clang-format is not installed, auto formating will not be performed")
+endif()

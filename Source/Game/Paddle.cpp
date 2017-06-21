@@ -1,114 +1,120 @@
 #include "Paddle.h"
 
-Paddle::Paddle(Ball *ball) {
-	this->ball = ball;
+Paddle::Paddle(Ball* ball) {
+    this->ball = ball;
 
-	rectangle.setSize(sf::Vector2f((float)width, (float)height));
-	position = sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
-	limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
+    rectangle.setSize(sf::Vector2f((float)width, (float)height));
+    position =
+        sf::Vector2f(100, (Arkanoid::SCREEN_HEIGHT - (rectangle.getSize().y * 2)));
+    limitRight = ((Arkanoid::SCREEN_WIDTH - rectangle.getSize().x) - 20);
 
-	//objetos para controlar la duración de las pulsaciones
-	sLeft = new ButtonState();
-	sRight = new ButtonState();
+    // objetos para controlar la duración de las pulsaciones
+    sLeft = new ButtonState();
+    sRight = new ButtonState();
 }
 
 Paddle::~Paddle() {
-	delete sLeft;
-	delete sRight;
+    delete sLeft;
+    delete sRight;
 }
 
 void Paddle::LoadContent() {
-	rectangle.setPosition(position);
+    rectangle.setPosition(position);
 }
 
 void Paddle::Update(sf::Time elapsedTime) {
 
-	if (position.x < limitLeft) {
-		position.x = limitLeft;
-	}
-	else if (position.x > limitRight) {
-		position.x = limitRight;
-	}
+    if(position.x < limitLeft) {
+        position.x = limitLeft;
+    } else if(position.x > limitRight) {
+        position.x = limitRight;
+    }
 
-	/* =================================================================================================
-	 * CONTROLES DE LA PALA
-	 *================================================================================================*/
+    /* =================================================================================================
+     * CONTROLES DE LA PALA
+     *================================================================================================*/
 
-	 //pulsar izquierda
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		sLeft->buttonDown = true;
-		sRight->buttonDown = false; //No quiero que esten activados a la vez
+    // pulsar izquierda
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+       sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        sLeft->buttonDown = true;
+        sRight->buttonDown = false; // No quiero que esten activados a la vez
 
-		if (sLeft->stateChange) {    //Necesario para calcular la velocidad objetivo
-			initialSpeed = speed;
-		}
+        if(sLeft->stateChange) { // Necesario para calcular la velocidad
+                                 // objetivo
+            initialSpeed = speed;
+        }
 
-		moveTime = sLeft->steadyTime;
-		Speed(-LIMIT_SPEED, TAU);
-	}
+        moveTime = sLeft->steadyTime;
+        Speed(-LIMIT_SPEED, TAU);
+    }
 
-	//pulsar derecha
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		sRight->buttonDown = true;
-		sLeft->buttonDown = false; //No quiero que esten activados a la vez
+    // pulsar derecha
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
+            sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        sRight->buttonDown = true;
+        sLeft->buttonDown = false; // No quiero que esten activados a la vez
 
-		if (sRight->stateChange) {    //Necesario para calcular la velocidad objetivo
-			initialSpeed = speed;
-		}
+        if(sRight->stateChange) { // Necesario para calcular la velocidad
+                                  // objetivo
+            initialSpeed = speed;
+        }
 
-		moveTime = sRight->steadyTime;
-		Speed(LIMIT_SPEED, TAU);
-	}
-	//frenada (nada pulsado)
-	else {
-		sRight->buttonDown = false;
-		sLeft->buttonDown = false;
+        moveTime = sRight->steadyTime;
+        Speed(LIMIT_SPEED, TAU);
+    }
+    // frenada (nada pulsado)
+    else {
+        sRight->buttonDown = false;
+        sLeft->buttonDown = false;
 
-		//es un pequeño lio para determinar que steady Time hay que usar
-		if (sLeft->stateChange || sRight->stateChange) {
-			initialSpeed = speed;
-		}
-		if (sRight->steadyTime < sLeft->steadyTime)
-			moveTime = sRight->steadyTime;
-		else
-			moveTime = sLeft->steadyTime;
+        // es un pequeño lio para determinar que steady Time hay que usar
+        if(sLeft->stateChange || sRight->stateChange) {
+            initialSpeed = speed;
+        }
+        if(sRight->steadyTime < sLeft->steadyTime)
+            moveTime = sRight->steadyTime;
+        else
+            moveTime = sLeft->steadyTime;
 
-		Speed(0, TAU);
-	}
+        Speed(0, TAU);
+    }
 
-	//Posicion a partir de velocidad
-	position.x += speed * elapsedTime.asSeconds();
-	rectangle.setPosition(position);
+    // Posicion a partir de velocidad
+    position.x += speed * elapsedTime.asSeconds();
+    rectangle.setPosition(position);
 
-	sRight->timeUpdate(elapsedTime);
-	sLeft->timeUpdate(elapsedTime);
+    sRight->timeUpdate(elapsedTime);
+    sLeft->timeUpdate(elapsedTime);
 
-	/*CAPTURAR LA BOLA===========================================
-	*Fragmento de codigo correspondiente al saque de la bola
-	*Cuando se encuentra pegada a la paleta
-	*================================================*/
+    /*CAPTURAR LA BOLA===========================================
+    *Fragmento de codigo correspondiente al saque de la bola
+    *Cuando se encuentra pegada a la paleta
+    *================================================*/
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		ball->Capture(sf::Vector2f(position.x + ((width / 2 - ball->GetRadius())), position.y - 50));
-	}
-	else
-	{
-		if (ball->IsCaught()) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        ball->Capture(sf::Vector2f(position.x + ((width / 2 - ball->GetRadius())),
+                                   position.y - 50));
+    } else {
+        if(ball->IsCaught()) {
 
-			//lanzamiento aleatorio de la bola
-			std::normal_distribution<float> distribution(0.0f, 0.3f);
+            // lanzamiento aleatorio de la bola
+            std::normal_distribution<float> distribution(0.0f, 0.3f);
 
-			ball->Throw(sf::Vector2f(distribution(generator) + speed*elapsedTime.asSeconds() / 7, -1), 0);
-		}
-	}
+            ball->Throw(sf::Vector2f(distribution(generator) +
+                                         speed * elapsedTime.asSeconds() / 7,
+                                     -1),
+                        0);
+        }
+    }
 
-	/*=================================================================
-	 * FIN controles
-	 * ==============================================================*/
+    /*=================================================================
+     * FIN controles
+     * ==============================================================*/
 }
 
 void Paddle::Draw(sf::RenderWindow* window) {
-	window->draw(rectangle);
+    window->draw(rectangle);
 }
 
 /* aceleración de la paleta
@@ -116,9 +122,5 @@ void Paddle::Draw(sf::RenderWindow* window) {
  -> rapidez de transitorio
  */
 void Paddle::Speed(float speedlimit, float tau) {
-	speed = speedlimit + (initialSpeed - speedlimit) * exp(-tau * moveTime);
+    speed = speedlimit + (initialSpeed - speedlimit) * exp(-tau * moveTime);
 }
-
-
-
-

@@ -2,9 +2,8 @@
 
 using namespace GDES;
 
-int main()
-{
-	Arkanoid game;
-	game.Run();
-	return 0;
+int main() {
+    Arkanoid game;
+    game.Run();
+    return 0;
 }
