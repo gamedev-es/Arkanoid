@@ -15,6 +15,7 @@ Makefile
 Source/Makefile
 
 Build/
+build/
 OBJ/
 
 CMakeFiles/
