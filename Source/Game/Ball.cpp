@@ -21,6 +21,7 @@ void Ball::Update(sf::Time elapsedTime) {
             if(IsCollideX()) direction.x *= -1;
             if(IsCollideY()) direction.y *= -1;
         }
+        notifyObserver();
     }
 }
 
@@ -72,6 +73,10 @@ bool Ball::isPaddleCollide() const {
     return false;
 }
 
+void Ball::reverseDirection() {
+    direction.y *= -1;
+}
+
 bool Ball::IsCollideY() const {
     if(ball.getPosition().y + 2 * ball.getRadius() >= SCREEN_HEIGHT ||
        ball.getPosition().y <= 0) {
@@ -87,6 +92,22 @@ bool Ball::IsCaught() const {
 float Ball::GetRadius() const {
     return ball.getRadius();
 }
+
+sf::Vector2f Ball::GetPosition() const {
+    return ball.getPosition();
+}
+
+void Ball::notifyObserver() {
+    for(auto obs: observers)
+    {
+        obs->update(this);
+    }
+}
+
+void Ball::addObserver(CollisionObserverPtr observer) {
+    observers.emplace_back(observer);
+}
+
 
 void Ball::LoseBall() {
     // Aquí si la bola se pierde en la parte inferior
