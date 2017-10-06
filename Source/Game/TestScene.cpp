@@ -12,12 +12,22 @@ void TestScene::Initialize() {
     CreateBricks();
 
     auto* ball = new Ball();
-    auto paddle = std::make_unique<Paddle>(ball);
-    
+    auto paddle = std::make_unique<Paddle>();
+    paddle->AddBall(ball);
     ball->addObserver(brickCollision);
+
+    auto ball2 = new Ball();
+    ball2->addObserver(brickCollision);
+
+    auto ball3 = new Ball();
+    ball3->addObserver(brickCollision);
 
     AddEntity(std::move(paddle));
     AddEntity(std::unique_ptr<Ball>(ball));
+    AddEntity(std::unique_ptr<Ball>(ball2));
+    AddEntity(std::unique_ptr<Ball>(ball3));
+
+
 }
 
 void TestScene::CreateBricks() {

@@ -24,6 +24,7 @@ void Brick::Draw(sf::RenderWindow* window) {
 bool Brick::CircleSphereCollision(const Ball* ball) {
     if (!visible)
         return false;
+
     const auto radius = ball->GetRadius();
     const auto pos = ball->GetPosition();
     const auto position = rectangle.getPosition();
