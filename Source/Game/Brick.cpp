@@ -17,13 +17,15 @@ void Brick::Update(sf::Time elapsedTime) {
 }
 
 void Brick::Draw(sf::RenderWindow* window) {
-    if(visible)
+    if (visible) {
         window->draw(rectangle);
+    }
 }
 
 bool Brick::CircleSphereCollision(const Ball* ball) {
-    if (!visible)
+    if (!visible) {
         return false;
+    }
 
     const auto radius = ball->GetRadius();
     const auto pos = ball->GetPosition();

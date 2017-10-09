@@ -81,7 +81,7 @@ void Paddle::Update(sf::Time elapsedTime) {
     *================================================*/
 
     if (balls.size() > 0) {
-        Ball * ball = balls[0];
+       auto ball = balls[0];
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             ball->Capture(sf::Vector2f(position.x + (width / 2 - ball->GetRadius()),
                 position.y - 50));
@@ -109,8 +109,8 @@ void Paddle::Draw(sf::RenderWindow* window) {
     window->draw(rectangle);
 }
 
-void Paddle::AddBall(Ball* ball) {
-    balls.push_back(ball);
+void Paddle::AddBall(std::shared_ptr<Ball> ball) {
+    balls.emplace_back(ball);
 }
 
 /* aceleración de la paleta

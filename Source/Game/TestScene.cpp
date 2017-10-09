@@ -11,21 +11,21 @@ void TestScene::Initialize() {
 
     CreateBricks();
 
-    auto* ball = new Ball();
+    auto ball = std::make_shared<Ball>();
     auto paddle = std::make_unique<Paddle>();
     paddle->AddBall(ball);
     ball->addObserver(brickCollision);
 
-    auto ball2 = new Ball();
+    auto ball2 = std::make_shared<Ball>();
     ball2->addObserver(brickCollision);
 
-    auto ball3 = new Ball();
+    auto ball3 = std::make_shared<Ball>();
     ball3->addObserver(brickCollision);
 
     AddEntity(std::move(paddle));
-    AddEntity(std::unique_ptr<Ball>(ball));
-    AddEntity(std::unique_ptr<Ball>(ball2));
-    AddEntity(std::unique_ptr<Ball>(ball3));
+    AddEntity(std::move(ball));
+    AddEntity(std::move(ball2));
+    AddEntity(std::move(ball3));
 
 
 }
@@ -41,9 +41,10 @@ void TestScene::CreateBricks() {
             xPos += brick->GetWidth() + 1;
 
             brickCollision->addCollidableBrick(brick);
-            AddBreakable(brick);
+            AddEntity(brick);
         }
         xPos = 20;
         yPos += 20 + 1;
     }
 }
+

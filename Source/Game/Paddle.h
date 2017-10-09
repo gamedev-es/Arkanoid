@@ -20,7 +20,7 @@ class Paddle : public GDES::Entity {
     void LoadContent() override;
     void Update(sf::Time elapsedTime) override;
     void Draw(sf::RenderWindow* window) override;
-    void AddBall(Ball*ball);
+    void AddBall(std::shared_ptr<Ball> ball);
   private:
     // movimiento
     const float TAU = 0.3f;
@@ -45,7 +45,7 @@ class Paddle : public GDES::Entity {
     std::unique_ptr<ButtonState> sRight{new ButtonState()};
 
     // cosas raras
-    std::vector<Ball*> balls;
+    std::vector<std::shared_ptr<Ball>> balls;
     std::default_random_engine generator;
 
     // metodos privados
