@@ -28,6 +28,9 @@ void CollisionObserver::update(Ball* ball) {
     {
         ball->reverseDirection();
         //Recitificar collided brick
+
+        //Notification to some observers: Manage Score, Bonification or something else. 
+        //notifyObservers(collidedBrick) 
     }
 }
 

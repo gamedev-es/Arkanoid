@@ -1,6 +1,7 @@
 #include <memory>
 
 #include "TestScene.h"
+#include "BrickFactory.h"
 
 TestScene::TestScene() {
     Initialize();
@@ -34,14 +35,23 @@ void TestScene::CreateBricks() {
     unsigned xPos = 20;
     unsigned yPos = 50;
 
+    BrickFactory factory;
+
+    //PATTERN: R->Red, Y->Yellow, B->Blue , G->Green, anything else empty slot 
+    char* pattern[5] = {"RYRYRYRYRYRY", "RYRYRYRYRYRY" , "BBBBBBBBBBBB" , "RYR------YRY" , "RYG------GYR" };
+
     for(int v = 0; v < 5; v++) {
         for(int h = 0; h < 12; h++) {
-            auto color = (h % 2) ? sf::Color::Red : sf::Color::Yellow;
-            auto brick = std::make_shared<Brick>(xPos, yPos, color);
-            xPos += brick->GetWidth() + 1;
+            auto value = pattern[v][h];
+           
+             if(factory.HasBrick(value)) {
+                auto brick = factory.CreateBrick(value, xPos, yPos);
+                brickCollision->addCollidableBrick(brick);
+                AddEntity(brick);
+            }
 
-            brickCollision->addCollidableBrick(brick);
-            AddEntity(brick);
+            xPos += 60 + 1; //const?? 
+
         }
         xPos = 20;
         yPos += 20 + 1;
