@@ -11,6 +11,12 @@ void BrickFactory::Init() {
     templates['Y'] = sf::Color::Yellow;
     templates['R'] = sf::Color::Red;
     templates['B'] = sf::Color::Blue;
+
+	//Number of hits asociated to each color
+	strength['G'] = 1;
+	strength['Y'] = 2;
+	strength['R'] = 3;
+	strength['B'] = 5;
 }
 
 bool BrickFactory::HasBrick(char id) {
@@ -21,5 +27,6 @@ std::shared_ptr<Brick> BrickFactory::CreateBrick(char pattern, int x,
     int y) {
 
    auto color = templates[pattern];
-   return std::make_shared<Brick>(x, y, color);
+   unsigned char brickStrength = strength[pattern];
+   return std::make_shared<Brick>(x, y, brickStrength, color);
 }

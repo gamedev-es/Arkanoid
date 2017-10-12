@@ -1,9 +1,10 @@
 #include "Brick.h"
 #include "Ball.h"
-Brick::Brick(unsigned x, unsigned y, sf::Color color) : visible(true) {
+Brick::Brick(unsigned x, unsigned y, unsigned char strength, sf::Color color) : visible(true) {
     rectangle.setFillColor(color);
     rectangle.setSize(sf::Vector2f(width, height));
     rectangle.setPosition(sf::Vector2f(x, y));
+	this->brickStrength = strength;
 }
 
 void Brick::LoadContent() {
@@ -47,7 +48,9 @@ bool Brick::CircleSphereCollision(const Ball* ball) {
 
         collided = collided || (dx*dx + dy*dy <= radius*radius);
         if (collided) {
-            visible = false;
+			this->brickStrength--;
+			if(this->brickStrength <= 0)
+				visible = false;
         }
     }
     return collided;

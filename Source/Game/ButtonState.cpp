@@ -1,9 +1,10 @@
 #include "ButtonState.h"
 
-ButtonState::ButtonState() {
+ButtonState::ButtonState(){
 }
 
-void ButtonState::timeUpdate(sf::Time elapsedTime) {
+void ButtonState::timeUpdate(sf::Time elapsedTime) 
+{
     steadyTime += elapsedTime.asSeconds(); // cuenta el tiempo transcurrido;
     if(buttonDown != previousDown) {
         steadyTime = 0;

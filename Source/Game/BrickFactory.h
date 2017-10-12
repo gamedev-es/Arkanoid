@@ -17,4 +17,5 @@ public:
 private:
     //only color template, different brick definition. [Map: -Memory eff, +Flexibility] 
     std::unordered_map<char, sf::Color> templates;
+	std::unordered_map<char, unsigned char> strength;
 };
