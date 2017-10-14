@@ -38,7 +38,7 @@ void TestScene::CreateBricks() {
     BrickFactory factory;
 
     //PATTERN: R->Red, Y->Yellow, B->Blue , G->Green, anything else empty slot 
-    char* pattern[5] = {"RYRYRYRYRYRY", "RYRYRYRYRYRY" , "BBBBBBBBBBBB" , "RYR------YRY" , "RYG------GYR" };
+    const char* pattern[5] = {"RYRYRYRYRYRY", "RYRYRYRYRYRY" , "BBBBBBBBBBBB" , "RYR------YRY" , "RYG------GYR" };
 
     for(int v = 0; v < 5; v++) {
         for(int h = 0; h < 12; h++) {

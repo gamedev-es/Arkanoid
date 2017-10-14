@@ -1,5 +1,8 @@
+#include <cmath>
+
 #include "Brick.h"
 #include "Ball.h"
+
 Brick::Brick(unsigned x, unsigned y, unsigned char strength, sf::Color color) : visible(true) {
     rectangle.setFillColor(color);
     rectangle.setSize(sf::Vector2f(width, height));
@@ -35,8 +38,8 @@ bool Brick::CircleSphereCollision(const Ball* ball) {
     
     const sf::Vector2f halfSize(width / 2, height / 2);
 
-    const auto dist_x = abs(pos.x - position.x - width / 2);
-    const auto dist_y = abs(pos.y - position.y - height / 2);
+    const auto dist_x = std::abs(pos.x - position.x - width / 2);
+    const auto dist_y = std::abs(pos.y - position.y - height / 2);
 
     //Hay que pulir esta parte que la he hecho rapido sin pensar mucho que tengo que ir a comprar xDD
     if (dist_x <= (width / 2 + radius) && (dist_y <= height / 2 + radius)) {
