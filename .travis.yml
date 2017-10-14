@@ -12,7 +12,6 @@ matrix:
           packages:
             - g++-4.9
       env:
-         - COMPILER=g++-4.9
          - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
     # works on Precise and Trusty
@@ -24,7 +23,6 @@ matrix:
           packages:
             - g++-5
       env:
-         - COMPILER=g++-5
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
     # works on Precise and Trusty
@@ -36,7 +34,6 @@ matrix:
           packages:
             - g++-6
       env:
-         - COMPILER=g++-6
          - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
     # works on Precise and Trusty
@@ -48,7 +45,6 @@ matrix:
           packages:
             - g++-7
       env:
-         - COMPILER=g++-7
          - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
     # works on Trusty
     - os: linux
@@ -56,10 +52,11 @@ matrix:
         apt:
           sources:
             - llvm-toolchain-trusty-4.0
+            - ubuntu-toolchain-r-test
           packages:
             - clang-4.0
+            - g++-6
       env:
-         - COMPILER=clang++-4.0
          - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
     # works on Trusty
@@ -68,16 +65,15 @@ matrix:
         apt:
           sources:
             - llvm-toolchain-trusty-5.0
+            - ubuntu-toolchain-r-test
           packages:
             - clang-5.0
+            - g++-6
       env:
-         - COMPILER=clang++-5.0
          - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
 before_install:
 # TODO: Install cppcheck
-   - sudo apt-get update
-   - sudo apt-get install -y build-essential g++
    - sudo apt-get install -y cmake
    - sudo apt-get install -y libsfml-dev
    - eval "${MATRIX_EVAL}"

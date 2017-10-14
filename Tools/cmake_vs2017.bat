@@ -4,4 +4,3 @@ mkdir "../Solutions/VS2017"
 cd "../Solutions/VS2017" 
 cmake "../../" -G "Visual Studio 15 2017 Win64"
 cd "../../Tools"
-pause
