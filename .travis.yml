@@ -87,4 +87,4 @@ before_install:
 script:
    - mkdir build
    - cd build
-   - cmake -Wno-dev .. && make
+   - cmake -Wno-dev .. && make VERBOSE=1
