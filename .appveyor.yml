@@ -1,11 +1,15 @@
 version: 1.0.{build}
+
+# OS image
 os: Visual Studio 2015
 platform: x64
-test: off
 
 # build configuration, i.e. Debug, Release, etc.
 configuration:
   - Debug
+
+environment:
+  CPPCHECK_SEARCH_PATHS: C:\Program Files\Cppcheck
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -15,28 +19,20 @@ init:
 # clone directory
 clone_folder: C:\projects\arkanoid
 
-#
 # Setup CPPCHECK
-#  /i = run install sequence 
-#  /QN = run completely silently
-#  /L*V "C:\Temp\msilog.log"= verbose logging
 install:
   - ps: 'Start-FileDownload "http://github.com/danmar/cppcheck/releases/download/1.81/cppcheck-1.81-x64-Setup.msi" -FileName "cppcheck-1.81-x64-Setup.msi"'
   - cmd: start /wait msiexec /i cppcheck-1.81-x64-Setup.msi /QN /norestart /L*V "msilog.log"
-#  - 'Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i cppcheck-1.81-x64-Setup.msi /QN /norestart /L*V "msilog.log"" -wait'
-#  - 'msiexec /i cppcheck-1.81-x64-Setup.msi /QN /norestart /L*V "C:\projects\arkanoid\msilog.log"'
 
-#
 # Before Build
-#
 before_build:
   - cmd: cd /d C:\projects\arkanoid\Tools
   - cmd: cmake_vs2015.bat
 
-#
 # Build
-#
 build_script:
   project: C:\projects\arkanoid\Solutions\VS2015\Arkanoid.sln
-# - cd Solutions\VS2015
-# - msbuild Arkanoid.sln
+
+# Test
+test: off
+  
