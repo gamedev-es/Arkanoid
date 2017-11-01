@@ -9,13 +9,13 @@ class Brick;
 class BrickFactory
 {
 public:
-    BrickFactory();
-    void Init();
-    bool HasBrick(char id);
-    std::shared_ptr<Brick> CreateBrick(char pattern, int x, int y);
-    virtual ~BrickFactory() = default;
+	BrickFactory();
+	void Init();
+	bool HasBrick(char id);
+	std::shared_ptr<Brick> CreateBrick(char pattern, int x, int y);
+	virtual ~BrickFactory() = default;
 private:
-    //only color template, different brick definition. [Map: -Memory eff, +Flexibility] 
-    std::unordered_map<char, sf::Color> templates;
+	//only color template, different brick definition. [Map: -Memory eff, +Flexibility] 
+	std::unordered_map<char, sf::Color> templates;
 	std::unordered_map<char, unsigned char> strength;
 };

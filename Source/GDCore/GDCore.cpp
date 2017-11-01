@@ -2,77 +2,74 @@
 #include <SFML/Window/Event.hpp>
 
 namespace GDES {
-const sf::Time GDCore::TimePerFrame = sf::seconds(1.f / 60.f);
+	const sf::Time GDCore::TimePerFrame = sf::seconds(1.f / 60.f);
 
-GDCore::GDCore(const sf::String& title, int width, int height, const sf::String& assetsDiretory)
-    : mWindow(sf::VideoMode(width, height), title, sf::Style::Close) {
-    assetsDirectoryRoot = assetsDiretory;
-    Initialize();
-}
+	GDCore::GDCore(const sf::String& title, int width, int height, const sf::String& assetsDiretory) {
+		assetsDirectoryRoot = assetsDiretory;
 
-void GDCore::Initialize() {
-    exit = false;
-    mWindow.setView(mWindow.getDefaultView());
-    mWindow.setFramerateLimit(60);
-}
+		mWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
 
-void GDCore::Run() {
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    while(mWindow.isOpen() && !exit) {
-        sf::Time elapsedTime = clock.restart();
-        timeSinceLastUpdate += elapsedTime;
-        while(timeSinceLastUpdate > TimePerFrame) {
-            timeSinceLastUpdate -= TimePerFrame;
+		Initialize();
+	}
 
-            ProcessEvents();
-            Update(TimePerFrame);
-        }
+	void GDCore::Initialize() {
+		exit = false;
+		mWindow->setView(mWindow->getDefaultView());
+		mWindow->setFramerateLimit(60);
+	}
 
-        Render();
-    }
-}
+	void GDCore::Run() {
+		sf::Clock clock;
+		sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
-void GDCore::ProcessEvents() {
-    sf::Event event;
-    while(mWindow.pollEvent(event)) {
-        switch(event.type) {
-        case sf::Event::Closed:
-            mWindow.close();
-            break;
-        }
-    }
-}
+		// Start Game Loop
+		while (mWindow->isOpen() && !exit) {
+			sf::Time elapsedTime = clock.restart();
+			timeSinceLastUpdate += elapsedTime;
+			while (timeSinceLastUpdate > TimePerFrame) {
+				timeSinceLastUpdate -= TimePerFrame;
 
-void GDCore::Update(sf::Time elapsedTime) {
-    if(GetSceneManager()->GetCurrentScene() != nullptr) {
-        GetSceneManager()->GetCurrentScene()->Update(elapsedTime);
-    }
-}
+				ProcessEvents();
+				Update(TimePerFrame);
+			}
 
-void GDCore::Render() {
-    mWindow.clear();
+			Render();
+		}
+	}
 
-    if(GetSceneManager()->GetCurrentScene() != nullptr) {
-        GetSceneManager()->GetCurrentScene()->Draw(&mWindow);
-    }
+	void GDCore::ProcessEvents() {
+		sf::Event event;
+		while (mWindow->pollEvent(event)) {
+			switch (event.type) {
+			case sf::Event::Closed:
+				mWindow->close();
+				break;
+			}
+		}
+	}
 
-    mWindow.display();
-}
+	void GDCore::Update(sf::Time elapsedTime) {
+		if (GetSceneManager()->GetCurrentScene() != nullptr) {
+			GetSceneManager()->GetCurrentScene()->Update(elapsedTime);
+		}
+	}
 
-void GDCore::Exit() {
-    exit = true;
-}
+	void GDCore::Render() {
+		mWindow->clear();
 
-void GDCore::SetTitle(const sf::String& title) {
-    mWindow.setTitle(title);
-}
+		if (GetSceneManager()->GetCurrentScene() != nullptr) {
+			GetSceneManager()->GetCurrentScene()->Draw(mWindow);
+		}
 
-GDCore::~GDCore() {
-    SceneManager* sceneManager = GetSceneManager();
-    if(sceneManager) {
-        delete sceneManager;
-        sceneManager = nullptr;
-    }
-}
+		mWindow->display();
+	}
+
+	void GDCore::Exit() {
+		exit = true;
+	}
+
+	void GDCore::SetTitle(const sf::String& title) {
+		mWindow->setTitle(title);
+	}
+
 }

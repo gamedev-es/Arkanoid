@@ -1,26 +1,30 @@
 #include "Scene.h"
 
 namespace GDES {
-void Scene::AddEntity(std::shared_ptr<Entity>&& entity) {
-    entity->LoadContent();
-    entityList.emplace_back(std::move(entity));
-}
 
-void Scene::Update(sf::Time elapsedTime) {
-    for (auto& e : entityList) {
-        e->Update(elapsedTime);
-    }
-}
+	void Scene::Initialize() {
+		for (auto& e : entityList) {
+			e->Initialize();
+		}
+	}
 
-void Scene::Draw(sf::RenderWindow* window) {
+	void Scene::AddEntity(std::shared_ptr<IEntity>&& entity) {
+		entityList.emplace_back(std::move(entity));
+	}
 
-    if(!window) {
-        return; // Nada que dibujar
-    }
+	void Scene::Update(sf::Time elapsedTime) {
+		for (auto& e : entityList) {
+			e->Update(elapsedTime);
+		}
+	}
 
-    for (auto& e : entityList) {
-        e->Draw(window);
-    }
+	void Scene::Draw(const std::unique_ptr<sf::RenderWindow> & window) {
+		if (!window) {
+			return; // Nada que dibujar
+		}
 
-}
+		for (auto& e : entityList) {
+			e->Draw(window);
+		}
+	}
 } // namespace GDES

@@ -7,14 +7,10 @@
 #include "Paddle.h"
 
 class TestScene : public GDES::Scene {
-  public:
-    TestScene();
-
-    void Initialize();
-
-  private:
-    void CreateBricks();
-    CollisionObserverPtr brickCollision;
-
-
+public:
+	TestScene::TestScene() : Scene("Test") {}
+	virtual void Initialize() override;
+private:
+	void CreateBricks();
+	CollisionObserverPtr brickCollision;
 };

@@ -1,68 +1,69 @@
 #include "SceneManager.h"
 
 namespace GDES {
-SceneManager::~SceneManager() {
-    for(auto& s : sceneMap) {
-        Scene* scene = s.second;
-        delete scene;
-        scene = nullptr;
-    }
-    sceneMap.clear();
-}
+	SceneManager::~SceneManager() {
+		for (auto& s : sceneMap) {
+			std::shared_ptr<Scene> scene = s.second;
+			scene.reset();
+		}
+		sceneMap.clear();
+	}
 
-bool SceneManager::AddScene(int sceneIndex, Scene* scene, bool isCurrentScene) {
-    if(!scene) {
-        return false;
-    }
+	bool SceneManager::AddScene(std::shared_ptr<Scene> scene, bool isCurrentScene) {
+		if (!scene) {
+			return false;
+		}
 
-    sceneMap.insert(std::make_pair(sceneIndex, scene));
+		sceneMap.insert(std::make_pair(scene->GetName(), scene));
 
-    if(isCurrentScene) {
-        currentScene = scene;
-    }
+		if (isCurrentScene) {
+			currentScene = scene;
+			currentScene->Initialize();
+		}
 
-    return true;
-}
+		return true;
+	}
 
-bool SceneManager::LoadScene(int sceneIndex) {
-    std::map<int, Scene*>::iterator it = sceneMap.find(sceneIndex);
+	bool SceneManager::LoadScene(std::string sceneName) {
+		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
-    if(it == sceneMap.end()) {
-        return false; // No existe esa escena
-    }
+		if (it == sceneMap.end()) {
+			return false; // No existe esa escena
+		}
 
-    currentScene = it->second;
+		currentScene = it->second;
 
-    return true;
-}
+		currentScene->Initialize();
 
-bool SceneManager::RemoveScene(int sceneIndex, bool removeFromMemory) {
-    std::map<int, Scene*>::iterator it = sceneMap.find(sceneIndex);
+		return true;
+	}
 
-    if(it == sceneMap.end()) {
-        return false; // No existe esa escena
-    }
+	bool SceneManager::RemoveScene(std::string sceneName, bool removeFromMemory) {
+		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
-    // Lo dejamos opcional en caso que no se quiera borrar la scene
-    // solo quitarlo del listado
-    if(removeFromMemory) {
-        Scene* scene = it->second;
-        delete scene;
-        scene = NULL;
-    }
+		if (it == sceneMap.end()) {
+			return false; // No existe esa escena
+		}
 
-    sceneMap.erase(it);
+		// Lo dejamos opcional en caso que no se quiera borrar la scene
+		// solo quitarlo del listado
+		if (removeFromMemory) {
+			std::shared_ptr<Scene> scene = it->second;
+			scene.reset();
+		}
 
-    return true;
-}
+		sceneMap.erase(it);
 
-Scene* SceneManager::GetScene(int sceneIndex) {
-    std::map<int, Scene*>::iterator it = sceneMap.find(sceneIndex);
+		return true;
+	}
 
-    if(it == sceneMap.end()) {
-        return NULL; // No existe esa escena
-    }
+	std::shared_ptr<Scene> SceneManager::GetScene(std::string sceneName) {
+		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
-    return it->second;
-}
+		if (it == sceneMap.end()) {
+			return NULL; // No existe esa escena
+		}
+
+		return it->second;
+	}
 }

@@ -10,14 +10,14 @@
  * o no pulsado dicho boton */
 
 class ButtonState {
-  public:
-    ButtonState();
+public:
+	ButtonState();
 
-    bool previousDown = false;
-    void timeUpdate(sf::Time elapsedTime);
+	bool previousDown = false;
+	void timeUpdate(sf::Time elapsedTime);
 
-  public:
-    bool buttonDown = false;
-    float steadyTime = 0;
-    bool stateChange = false;
+public:
+	bool buttonDown = false;
+	float steadyTime = 0;
+	bool stateChange = false;
 };

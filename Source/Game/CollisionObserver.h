@@ -8,13 +8,11 @@ class Brick;
 class CollisionObserver
 {
 public:
-    CollisionObserver();
-    ~CollisionObserver();
-    void update(Ball * ball);
-    void addCollidableBrick(std::shared_ptr<Brick> brick);
+	CollisionObserver() = default;
+	~CollisionObserver() = delete;
+	void Update(std::shared_ptr<Ball> ball);
+	void AddCollidableBrick(std::shared_ptr<Brick> brick);
 private:
-    std::vector<std::shared_ptr<Brick>> bricks;
-
-
+	std::vector<std::shared_ptr<Brick>> bricks;
 };
 

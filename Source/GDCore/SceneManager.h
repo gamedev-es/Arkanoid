@@ -1,24 +1,25 @@
 #pragma once
 
 #include "Scene.h"
+#include <string>
 #include <map>
 
 namespace GDES {
-class SceneManager {
-  public:
-    SceneManager() = default;
-    ~SceneManager();
+	class SceneManager {
+	public:
+		SceneManager() = default;
+		~SceneManager();
 
-    bool AddScene(int sceneIndex, Scene* scene, bool isCurrentScene = false);
-    bool LoadScene(int sceneIndex);
-    bool RemoveScene(int sceneIndex, bool removeFromMemory);
-    Scene* GetScene(int sceneIndex);
-    Scene* GetCurrentScene() {
-        return currentScene;
-    }
+		bool AddScene(std::shared_ptr<Scene> scene, bool isCurrentScene = false);
+		bool LoadScene(std::string);
+		bool RemoveScene(std::string, bool removeFromMemory);
+		std::shared_ptr<Scene> GetScene(std::string);
+		std::shared_ptr<Scene> GetCurrentScene() {
+			return currentScene;
+		}
 
-  private:
-    Scene* currentScene{nullptr};
-    std::map<int, Scene*> sceneMap;
-};
+	private:
+		std::shared_ptr<Scene> currentScene{ nullptr };
+		std::map<std::string, std::shared_ptr<Scene>> sceneMap;
+	};
 }
