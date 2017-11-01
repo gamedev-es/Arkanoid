@@ -8,7 +8,7 @@
 
 class TestScene : public GDES::Scene {
 public:
-	TestScene::TestScene() : Scene("Test") {}
+	TestScene() : Scene("Test") {}
 	virtual void Initialize() override;
 private:
 	void CreateBricks();
