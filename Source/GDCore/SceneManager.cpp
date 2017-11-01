@@ -24,7 +24,7 @@ namespace GDES {
 		return true;
 	}
 
-	bool SceneManager::LoadScene(std::string sceneName) {
+	bool SceneManager::LoadScene(const std::string& sceneName) {
 		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
 		if (it == sceneMap.end()) {
@@ -38,7 +38,7 @@ namespace GDES {
 		return true;
 	}
 
-	bool SceneManager::RemoveScene(std::string sceneName, bool removeFromMemory) {
+	bool SceneManager::RemoveScene(const std::string& sceneName, bool removeFromMemory) {
 		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
 		if (it == sceneMap.end()) {
@@ -57,7 +57,7 @@ namespace GDES {
 		return true;
 	}
 
-	std::shared_ptr<Scene> SceneManager::GetScene(std::string sceneName) {
+	std::shared_ptr<Scene> SceneManager::GetScene(const std::string& sceneName) {
 		std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMap.find(sceneName);
 
 		if (it == sceneMap.end()) {

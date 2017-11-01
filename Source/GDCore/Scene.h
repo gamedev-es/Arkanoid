@@ -11,7 +11,7 @@ namespace GDES {
 	class Scene {
 	public:
 		Scene() :name("") {}
-		Scene(std::string sceneName) : name(sceneName) {}
+		explicit Scene(const std::string& sceneName) : name(sceneName) {}
 		virtual ~Scene() = default;
 
 		virtual std::string GetName() { return name; }

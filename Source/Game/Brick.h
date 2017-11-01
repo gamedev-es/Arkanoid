@@ -21,7 +21,7 @@ private:
 	float EuclideanDistance(const sf::Vector2f & pos1, const sf::Vector2f &  pos2) const;
 	unsigned width = 60;
 	unsigned height = 20;
-	unsigned char brickStrength;
+	char brickStrength;
 	bool visible;
 	sf::RectangleShape rectangle;
 	sf::Vector2f position;

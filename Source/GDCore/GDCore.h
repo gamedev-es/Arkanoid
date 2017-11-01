@@ -16,8 +16,7 @@
 namespace GDES {
 	class GDCore {
 	public:
-		GDCore(const sf::String& title, int width, int heigh,
-			const sf::String& assetsDiretory = "Data");
+		GDCore(const sf::String& title, int width, int height, const sf::String& assetsDiretory = "Data");
 		virtual ~GDCore() = default;
 
 		void Initialize();
@@ -43,6 +42,9 @@ namespace GDES {
 
 	protected:
 		sf::String assetsDirectoryRoot;
+		sf::String title;
+		int width;
+		int height;
 	};
 }
 

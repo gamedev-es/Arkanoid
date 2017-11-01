@@ -4,16 +4,14 @@
 namespace GDES {
 	const sf::Time GDCore::TimePerFrame = sf::seconds(1.f / 60.f);
 
-	GDCore::GDCore(const sf::String& title, int width, int height, const sf::String& assetsDiretory) {
-		assetsDirectoryRoot = assetsDiretory;
-
-		mWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
-
+	GDCore::GDCore(const sf::String& title, int width, int height, const sf::String& assetsDirectoryRoot)
+		: title(title), width(width), height(height), assetsDirectoryRoot(assetsDirectoryRoot) {
 		Initialize();
 	}
 
 	void GDCore::Initialize() {
 		exit = false;
+		mWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
 		mWindow->setView(mWindow->getDefaultView());
 		mWindow->setFramerateLimit(60);
 	}
